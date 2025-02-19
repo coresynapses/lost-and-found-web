@@ -87,5 +87,5 @@ TamiuLostAndFound folder.
 
 Avoid modifying the following files:
 - manage.py
-- TamiuLostAndFound/settings.py
 - db.sqlite3
+- TamiuLostAndFound/settings.py
