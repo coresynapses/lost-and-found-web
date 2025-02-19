@@ -37,7 +37,8 @@ To verify that Django works, run the server:
 python manage.py runserver 8080
 ```
 
-If you have issues related to the database or migrations, run the following code:
+If you have issues related to the database or migrations, run the
+following code:
 
 ```
 python manage.py migrate
@@ -57,6 +58,16 @@ You do this by executing the following in the project root directory:
 python manage.py runserver 8080
 ```
 
+Most of the frontend work will be done in the following folders:
+- TamiuLostAndFound/templates - contains HTML files
+- TamiuLostAndFound/static - contains CSS and JS files
+
+Since we are using Django, frontend developers should be familiar with
+Django templates.
+
+More information is here:
+https://docs.djangoproject.com/en/5.1/topics/templates/
+
 ## For Backend work
 
 Before you start working with the code base, you need to start the
@@ -70,3 +81,11 @@ You do this by executing the following in the project root directory:
 
 You don't need to run the server as the changes you make will change
 the way the server behaves.
+
+Most of the backend work will be done in the Python files found in the
+TamiuLostAndFound folder.
+
+Avoid modifying the following files:
+- manage.py
+- TamiuLostAndFound/settings.py
+- db.sqlite3
