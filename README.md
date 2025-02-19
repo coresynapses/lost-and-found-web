@@ -34,10 +34,16 @@ python install -r .\requirements.txt
 To verify that Django works, run the server:
 
 ```
-python manage.py runserver
+python manage.py runserver 8080
 ```
 
-Visit http://localhost:8000 to check that the website works.
+If you have issues related to the database or migrations, run the following code:
+
+```
+python manage.py migrate
+```
+
+Visit http://localhost:8080 to check that the website works.
 
 ## For Frontend work
 
