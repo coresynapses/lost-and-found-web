@@ -47,4 +47,26 @@ Visit http://localhost:8080 to check that the website works.
 
 ## For Frontend work
 
+Before you start working with the code base, you need to start the
+Python virtual environment and run the server.
+
+You do this by executing the following in the project root directory:
+
+```
+.\.env\Scripts\Activate.ps1
+python manage.py runserver 8080
+```
+
 ## For Backend work
+
+Before you start working with the code base, you need to start the
+Python virtual environment.
+
+You do this by executing the following in the project root directory:
+
+```
+.\.env\Scripts\Activate.ps1
+```
+
+You don't need to run the server as the changes you make will change
+the way the server behaves.
