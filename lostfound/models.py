@@ -57,16 +57,16 @@ class Item(models.Model):
     ]
 
     itemID = models.AutoField(primary_key=True)
-    itemName = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    itemName = models.CharField("Item Name", max_length=255)
+    description = models.TextField(blank=True, null=True)
     category = models.ForeignKey(Category, null= True, default=1,on_delete=models.CASCADE)
-    dateReported = models.DateTimeField(auto_now_add=True)
-    dateClaimed = models.DateTimeField(null= True, blank=True, default=timezone.now)
+    dateReported = models.DateTimeField("Date Reported", auto_now_add=True)
+    dateClaimed = models.DateTimeField("Date Claimed", null= True, blank=True)
     location = models.CharField(max_length=255)
     photo = models.ImageField(upload_to= 'item_photos/', null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=Lost)
-    contactInfo = models.CharField(max_length=255)
-    proofOfOwnership = models.TextField(blank=True, null=True)
+    contactInfo = models.CharField("Contact Information",max_length=255)
+    proofOfOwnership = models.TextField("Proof of Ownership",blank=True, null=True)
     claimer = models.ForeignKey(CustomUser, null= True, blank = True, on_delete=models.SET_NULL)
     
 
