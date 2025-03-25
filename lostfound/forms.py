@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from . models import CustomUser
+from . models import CustomUser, Item
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -17,3 +17,14 @@ class searchForm(forms.Form):
 
 class claimItemForm(forms.Form):
     proofDescription = forms.CharField(widget=forms.Textarea,required=True, label= "Please describe the item in detail.")
+
+
+#item creation
+class ItemForm(forms.ModelForm):
+    class Meta:
+            model = Item
+            fields = ['itemName', 'description', 'category', 'location', 'photo', 'status', 'contactInfo']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['photo'].required = False  # Make photo optional

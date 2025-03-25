@@ -15,7 +15,7 @@ class CustomUserAdmin(UserAdmin):
     ]
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display =["itemName","category","status","dateReported","location"]
+    list_display =["itemName","category","status","dateReported","location", "photo"]
     list_filter = ["status","category"]
     search_fields = ["itemName","description","location"]
 
