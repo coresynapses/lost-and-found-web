@@ -1,10 +1,6 @@
-from django.shortcuts import HttpResponse
-from django.shortcuts import render, redirect
-from .models import Item, Category
+from django.shortcuts import HttpResponse, render, redirect
+from .models import Item, Category, Report  # Ensure all models are imported
 from .forms import ItemForm
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the lostfound index.")
 
 def index(request):
     items = Item.objects.all()
@@ -19,3 +15,7 @@ def add_item(request):
     else:
         form = ItemForm()
     return render(request, 'lostfound/add_item.html', {'form': form})
+
+def reportList(request):
+    reports = Report.objects.all()
+    return render(request, 'reportList.html', {'Reports': reports})
