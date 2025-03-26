@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from . forms import CustomUserCreationForm, CustomUserChangeForm
-from . models import CustomUser, Item
+from . models import CustomUser, Item, Category
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
@@ -49,9 +49,13 @@ class ItemAdmin(admin.ModelAdmin):
         "category",
         "location",
         "status",
-        "contactInfo",  # Andre's updates
+        "contactInfo",  # Andres's updates
         "photo",  # Andrew's Updates
     ]
+
+   # @admin.register(Category)
+   # class CategoryAdmin(admin.ModelAdmin):
+    #    list_display = ('id', 'name')  # Ensure it's visible in the admin panel
 
 admin.site.register(Item, ItemAdmin)
 admin.site.register(CustomUser,CustomUserAdmin)
