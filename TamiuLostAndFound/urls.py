@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("lostfound/", include("lostfound.urls")),
+    path('homepage/',include("lostfound.urls")),
     path('admin/', admin.site.urls),
 ]
 
