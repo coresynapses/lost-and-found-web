@@ -19,9 +19,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from LostAndFoundAndroid import views
+
 urlpatterns = [
     path("lostfound/", include("lostfound.urls")),
     path('admin/', admin.site.urls),
+    path("android/", views.android, name="android")
 ]
 
 #url patterns for media files
