@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-uli+r_12g80w^=lq%82rylcxisiig!lzfkc(cr(ke62@3vldan
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "10.0.2.2" # Whitelist the Android Emulator. For development purpose only. Delete later.
+]
 
 
 # Application definition
