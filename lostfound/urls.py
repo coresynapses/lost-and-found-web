@@ -7,3 +7,4 @@ urlpatterns = [
     path("add/", views.add_item, name="add_item"),  # Media
     path("report/", reportList, name="reportList"),  # Report List
 ]
+#this works
