@@ -19,3 +19,6 @@ def add_item(request):
 def reportList(request):
     reports = Report.objects.all()
     return render(request, 'reportList.html', {'Reports': reports})
+
+def homepage(request):
+    return render(request, 'homepage.html')
