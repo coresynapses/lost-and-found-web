@@ -1,5 +1,5 @@
 from django.shortcuts import HttpResponse, render, redirect
-from .models import Item, Category, Report  # Ensure all models are imported
+from .models import Item, itemReport  # Ensure all models are imported
 from .forms import ItemForm
 
 def index(request):
@@ -17,7 +17,7 @@ def add_item(request):
     return render(request, 'lostfound/add_item.html', {'form': form})
 
 def reportList(request):
-    reports = Report.objects.all()
+    reports = itemReport.objects.all()
     return render(request, 'reportList.html', {'Reports': reports})
 
 def homepage(request):
