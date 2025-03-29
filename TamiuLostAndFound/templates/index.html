@@ -1,12 +1,25 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>TAMIU Lost and Found</title>
+
+        <!-- React and Babel Libraries from django web -->
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Link to Static style.CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
   </head>
   <body>
     <h1>TAMIU Lost and Found</h1>
-    <script src="dynamic.js"></script>
+
+    <!--React root for dynamic.js-->
+    <div id="root"></div>
+
+     <!-- Link to Static JavaScript -->
+     <script src="{% static 'dynamic.js' %}"></script>
+
   </body>
 </html>
