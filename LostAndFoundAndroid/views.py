@@ -34,3 +34,6 @@ def android(request):
         })
 
     return JsonResponse(data)
+
+def androidUpload(request):
+    return HttpResponse()
