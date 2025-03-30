@@ -35,6 +35,14 @@
         </select>
     </div>
 
+    <!--Image upload-->
+    <div class="upload-container">
+        <input type="file" id="upload-image" accept="image/*">
+        <button id="upload-btn" class="details-btn">Upload Image</button>
+        <div id="preview-container"></div> <!-- For displaying the preview -->
+    </div>
+    
+
     <!-- Grid-based Item Display -->
     <div class="item-container">
         {% for item in items %}

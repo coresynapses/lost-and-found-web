@@ -37,6 +37,79 @@ document.querySelectorAll('.filter-dropdown').forEach(filter => {
         });
     });
 });
+// Handle file input and preview the uploaded image
+
+document.getElementById('upload-image').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+
+    if (file) {
+        // Check if the file is an image
+        if (!file.type.startsWith('image/')) {
+            alert('Please upload a valid image file.');
+            return;
+        }
+
+        // Create a FileReader to preview the image
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            // Display the preview
+            const previewContainer = document.getElementById('preview-container');
+            previewContainer.innerHTML = `<img src="${e.target.result}" alt="Preview Image">`;
+        };
+        reader.readAsDataURL(file);
+         }
+});
+
+// Handle file input and preview the uploaded image
+document.getElementById('upload-image').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+
+    if (file) {
+        // Check if the file is an image
+        if (!file.type.startsWith('image/')) {
+            alert('Please upload a valid image file.');
+            return;
+        }
+
+        // Create a FileReader to preview the image
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const previewContainer = document.getElementById('preview-container');
+            previewContainer.innerHTML = `<img src="${e.target.result}" alt="Preview Image">`;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// Handle the upload button click event
+document.getElementById('upload-btn').addEventListener('click', function () {
+    const fileInput = document.getElementById('upload-image');
+    const file = fileInput.files[0];
+
+    if (file) {
+        const formData = new FormData();
+        formData.append('image', file);
+        // BACKEND Replace '/upload' with Django endpoint for upload handling
+        fetch('/upload', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert('Image uploaded successfully!');
+                console.log('Server response:', data);
+            })
+            .catch(error => {
+                console.error('Error uploading image:', error);
+                alert('Image upload failed.');
+            });
+    } else {
+        alert('Please select an image before uploading.');
+    }
+});
+
+
+
 
 // Details Button Functionality
 document.querySelectorAll('.details-btn').forEach(button => {
