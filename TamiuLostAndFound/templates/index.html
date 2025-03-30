@@ -1,25 +1,56 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>TAMIU Lost and Found</title>
-
-        <!-- React and Babel Libraries from django web -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- Link to Static style.CSS -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost and Found</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>Lost and Found</h1>
 
-  </head>
-  <body>
-    <h1>TAMIU Lost and Found</h1>
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" id="search-bar" placeholder="Search item here...">
+    </div>
 
-    <!--React root for dynamic.js-->
-    <div id="root"></div>
+    <!-- Filters -->
+    <div class="filters">
+        <select id="status-filter" class="filter-dropdown">
+            <option value="all">All Statuses</option>
+            <option value="lost">Lost</option>
+            <option value="found">Found</option>
+        </select>
+        <select id="category-filter" class="filter-dropdown">
+            <option value="all">All Categories</option>
+            <option value="electronics">Electronics</option>
+            <option value="jewelry">Jewelry</option>
+            <option value="clothing">Clothing</option>
+            <option value="other">Other</option>
+        </select>
+        <select id="disposition-filter" class="filter-dropdown">
+            <option value="all">All Dispositions</option>
+            <option value="claimed">Claimed</option>
+            <option value="unclaimed">Unclaimed</option>
+        </select>
+    </div>
 
-     <!-- Link to Static JavaScript -->
-     <script src="{% static 'dynamic.js' %}"></script>
+    <!-- Grid-based Item Display -->
+    <div class="item-container">
+        {% for item in items %}
+        <div class="item-card" 
+             data-status="{{ item.status|lower }}" 
+             data-category="{{ item.category|lower }}" 
+             data-disposition="{{ item.date_claimed|yesno:'claimed,unclaimed' }}">
+            <img src="{{ item.image_url }}" alt="{{ item.name }}">
+            <h3 class="item-name">{{ item.name }}</h3>
+            <p>Status: {{ item.status }}</p>
+            <p>Category: {{ item.category }}</p>
+            <p>Date Reported: {{ item.date_reported }}</p>
+            <p>Disposition: {{ item.date_claimed|default:"Unclaimed" }}</p>
+            <button class="details-btn" data-item-id="{{ item.id }}">Details</button>
+        </div>
+        {% endfor %}
+    </div>
 
-  </body>
-</html>
+    <script src="{% static 'dynamic.js' %}"></script>
