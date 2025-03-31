@@ -85,20 +85,6 @@ class Item(models.Model):
     def __str__(self):
         return f"{self.itemName} ({self.get_status_display()})"
     
-'''
-class itemReport(models.Model):
-    reportID = models.AutoField(primary_key=True)
-    reportedItems = models.ManyToManyField(Item)
-
-    def get_content(self):
-        return "\n".join([
-            f"Item: {item.itemName}\n"
-            f"Status: {item.status}\n"
-            f"Date Reported: {item.dateReported}\n"
-            f"Category: {item.category.categoryName}\n"
-            for item in self.reportedItems.all()
-        ])
-'''
 
 class claimRequestReport(models.Model):
     pending = "Pending"

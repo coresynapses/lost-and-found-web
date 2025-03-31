@@ -20,20 +20,21 @@ def registerUser(request):
             user = form.save()
             login(request,user)
             return redirect('itemList')
-        else:
-            form = CustomUserCreationForm()
-        return render(request, "registration/", {"form": form}) #needs HTML 
+    else:
+        form = CustomUserCreationForm()
+
+    return render(request, "registration/", {"form": form}) #needs HTML 
 
 #lists all items
 def itemList(request): 
-    item = Item.objects.all().values(
+    items = Item.objects.all().values(
         'itemName',
         'status',
         'dateReported',
         'category__categoryName',
     )
     
-    return render(request, '', {'item': item}) #needs HTML
+    return render(request, 'index.html', {'items': items})
 
 #provides details on one item, and can claim or report fraud on item.
 def itemDetail(request, item_id): 
