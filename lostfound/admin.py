@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from . forms import CustomUserCreationForm, CustomUserChangeForm
-from . models import CustomUser, Item, Category
+from . models import CustomUser, Item, claimRequestReport, fraudClaimReport
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
@@ -17,7 +17,7 @@ class CustomUserAdmin(UserAdmin):
     ]
 
     fieldsets = (
-        (None, {"fields": ("username","first_name","last_name", "email", "password1", "password2")}),
+        (None, {"fields": ("username","first_name","last_name", "email", "password")}),
         ("Permissions", {"fields": ("is_staff", "is_active", "is_superuser")}),
     )
     
@@ -25,7 +25,7 @@ class CustomUserAdmin(UserAdmin):
         (None, {"fields": ("username","first_name","last_name", "email", "password1", "password2")}),
     )
 
-class ItemAdmin(admin.ModelAdmin):
+class itemAdmin(admin.ModelAdmin):
     list_display = [
         "itemName",
         "category",
@@ -52,10 +52,72 @@ class ItemAdmin(admin.ModelAdmin):
         "contactInfo",  # Andres's updates
         "photo",  # Andrew's Updates
     ]
+    list_per_page = 20
 
-   # @admin.register(Category)
-   # class CategoryAdmin(admin.ModelAdmin):
-    #    list_display = ('id', 'name')  # Ensure it's visible in the admin panel
+class claimRequestAdmin(admin.ModelAdmin):
+    list_display = [
+        "status",
+        "item",
+        "claimer",
+        "dateSubmitted",
+        "dateReviewed",
+        "reviewAdmin",
+    ]
+    list_filter = [
+        "status",
+        "claimer",
+        "reviewAdmin",
+    ]
+    search_fields = [
+        "item__itemName",
+        "claimer__username",
+        "reviewAdmin__username",
+    ]
+    fields = [
+        "item",
+        "status",
+        "claimer",
+        "proofOfOwnership",
+        "dateReviewed",
+        "reviewAdmin",
+    ]
+    list_per_page = 20
 
-admin.site.register(Item, ItemAdmin)
+    def save_model(self, request, obj, form, change):
+        if obj.status == obj.approved:
+            obj.approveClaim(adminUser=request.user) #update the item status
+
+        super().save_model(request, obj, form, change)
+
+class fraudClaimAdmin(admin.ModelAdmin):
+    list_display = [
+        "status",
+        "item",
+        "reporter",
+        "dateSubmitted",
+        "dateReviewed",
+        "reviewAdmin",
+    ]
+    list_filter =[
+        "status",
+        "reporter",
+        "reviewAdmin",
+    ]
+    search_fields = [
+        "item__itemName",
+        "reporter__username",
+        "reviewAdmin__username",
+    ]
+    field = [
+        "item",
+        "status",
+        "reporter",
+        "proofOfOwnership",
+        "dateReviewed",
+        "reviewAdmin",
+    ]
+
+admin.site.register(Item, itemAdmin)
 admin.site.register(CustomUser,CustomUserAdmin)
+admin.site.register(claimRequestReport, claimRequestAdmin)
+admin.site.register(fraudClaimReport, fraudClaimAdmin)
