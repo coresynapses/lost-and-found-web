@@ -20,6 +20,8 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
+from LostAndFoundAndroid import views
+
 urlpatterns = [
     path("", include("lostfound.urls")),
     path("register/", include("lostfound.urls")),
@@ -29,7 +31,7 @@ urlpatterns = [
     path("fraud-report/", include("lostfound.urls")),
     path('homepage/',include("lostfound.urls")),
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
+    path("android/", views.android, name="android")
 ]
 
 #url patterns for media files
