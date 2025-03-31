@@ -66,25 +66,26 @@ class Item(models.Model):
     ]
 
     itemID = models.AutoField(primary_key=True)
-    itemName = models.CharField("Item Name", max_length=255)
-    description = models.TextField(blank=True, null=True)
+    itemName = models.CharField("Item Name", max_length=255, default="")
+    description = models.TextField(blank=True, null=True, default="")
     category = models.ForeignKey(Category, null= True, default=1,on_delete=models.CASCADE)
     dateReported = models.DateTimeField("Date Reported", auto_now_add=True)
     dateClaimed = models.DateTimeField("Date Claimed", null= True, blank=True)
-    location = models.CharField(max_length=255)
+    location = models.CharField(max_length=255,blank=True, null=True )
     photo = models.ImageField(upload_to= 'item_photos/', null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=lost)
-    contactInfo = models.CharField("Contact Information",max_length=255)
+    contactInfo = models.CharField("Contact Information",max_length=255, default="")
     proofOfOwnership = models.TextField("Proof of Ownership",blank=True, null=True)
     claimer = models.ForeignKey(CustomUser, null= True, blank = True, on_delete=models.SET_NULL)
 
     class Meta:
-        verbose_name = "Lost and Found Item"
+        verbose_name = "Item"
     
 
     def __str__(self):
         return f"{self.itemName} ({self.get_status_display()})"
-
+    
+'''
 class itemReport(models.Model):
     reportID = models.AutoField(primary_key=True)
     reportedItems = models.ManyToManyField(Item)
@@ -97,6 +98,7 @@ class itemReport(models.Model):
             f"Category: {item.category.categoryName}\n"
             for item in self.reportedItems.all()
         ])
+'''
 
 class claimRequestReport(models.Model):
     pending = "Pending"
@@ -112,7 +114,8 @@ class claimRequestReport(models.Model):
     claimID = models.AutoField(primary_key=True)
     item = models.OneToOneField(Item, on_delete=models.CASCADE)
     claimer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="claimUser")
-    proofOfOwnership = models.TextField("Proof of Ownership")
+    contactInfo = models.CharField("Contact Information",max_length=255, default="")
+    proofOfOwnership = models.TextField("Proof of Ownership",default="")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=pending)
     reviewAdmin = models.ForeignKey(CustomUser, null= True, blank= True, on_delete=models.SET_NULL, related_name="claimAdminUser")
     dateSubmitted = models.DateTimeField("Date Submitted",auto_now_add=True)
@@ -171,7 +174,8 @@ class fraudClaimReport(models.Model):
     fraudID = models.AutoField(primary_key=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     reporter = models.ForeignKey(CustomUser, on_delete=models.CASCADE,related_name="reportUser")
-    proofOfOwnership = models.TextField("Proof of Ownership")
+    contactInfo = models.CharField("Contact Information",max_length=255, default="")
+    proofOfOwnership = models.TextField("Proof of Ownership", default="")
     status = models.CharField(max_length=20, choices= STATUS_CHOICES, default=pending)
     reviewAdmin = models.ForeignKey(CustomUser, null = True, blank=True, on_delete=models.SET_NULL,related_name="reportAdminUser")
     dateSubmitted = models.DateTimeField(auto_now_add=True)
@@ -180,7 +184,7 @@ class fraudClaimReport(models.Model):
     class Meta:
         verbose_name = "Fraudulent Claim"
 
-    def resolveClaim(self, adminUser):
+    def resolveFraud(self, adminUser):
         self.status = self.resolved
         self.item.status = Item.claimed
         self.item.save()
@@ -190,8 +194,8 @@ class fraudClaimReport(models.Model):
 
         return f"Fraud claim for '{self.item.itemName}' has been resolved."
     
-    def rejectClaim(self, adminUser):
-        self.status = self.resolved
+    def rejectFraud(self, adminUser):
+        self.status = self.rejected
         self.item.status = Item.claimed
         self.item.save()
         self.reviewAdmin = adminUser
