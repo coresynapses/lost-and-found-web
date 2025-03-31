@@ -31,6 +31,124 @@ h1 {
     margin-bottom: 20px;
 }
 
+#registrationButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    
+}
+
+/*report page */
+
+/* Report Page Styling */
+#reportSection {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+}
+
+#reportSection h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #eaeaea;
+}
+
+
+/* registration page */
+
+
+
+.registration-section {
+    width: 400px; /* Adjust width as needed */
+    padding: 20px;
+    margin: 0 auto; /* Center horizontally */
+    background-color: #f9f9f9; /* Light background color for contrast */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 8px; /* Rounded corners for modern feel */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+    text-align: center; /* Center the heading */
+}
+
+
+.registration-section h2 {
+    text-align: center;
+    margin-bottom: 20px; /* Space below the title */
+}
+
+.registration-section form {
+    display: flex;
+    flex-direction: column; /* Stack form elements vertically */
+    align-items: center; /* Center align items */
+    gap: 15px; /* Add consistent spacing between form elements */
+}
+
+.registration-section form label {
+    display: block; /* Ensure labels are above inputs */
+    text-align: left; /* Align text left */
+    width: 100%; /* Make labels and inputs align properly */
+    font-weight: bold; /* Make labels more readable */
+}
+
+.registration-section form input {
+    width: 100%; /* Make inputs fill the width of the box */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Rounded corners for inputs */
+}
+
+.registration-section form button {
+    width: 100%; /* Full-width button */
+    padding: 10px;
+    background-color: #007bff; /* Button color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer;
+}
+
+.registration-section form button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+
 /*image upload */
 .upload-container {
     margin: 20px 0;

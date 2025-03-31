@@ -7,7 +7,29 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
+
     <h1>Lost and Found</h1>
+    <header>
+    <nav>
+                <a href="#" class="btn btn-primary"
+                     id="registrationButton">Register</a>
+    </nav>
+    <!-- Registration Form Section -->
+<div class="registration-section full-page" id="registrationSection" style="display: none;">
+    
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_username">Username:</label>
+        {{ form.username }}
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="id_password1">Password:</label>
+        {{ form.password1 }}
+        <label for="id_password2">Confirm Password:</label>
+        {{ form.password2 }}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
 
     <!-- Search Bar -->
     <div class="search-container">
@@ -35,6 +57,23 @@
         </select>
     </div>
 
+    <div id="reportSection" style="display: none;">
+        <h2>Reports</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Reported Status</th>
+                    <th>Category</th>
+                    <th>Date Reported</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic rows populated via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    
     <!--Image upload-->
     <div class="upload-container">
         <input type="file" id="upload-image" accept="image/*">

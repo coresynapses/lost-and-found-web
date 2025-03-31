@@ -5,6 +5,7 @@ window.addEventListener('load', function () {
     console.log('Lost and Found');
 });
 
+
 // Search Bar Functionality for Item Cards
 document.getElementById('search-bar').addEventListener('input', function (e) {
     const query = e.target.value.toLowerCase();
@@ -15,6 +16,21 @@ document.getElementById('search-bar').addEventListener('input', function (e) {
         item.style.display = itemName.includes(query) ? '' : 'none';
     });
 });
+
+// Toggle visibility for report page
+
+// Toggle visibility of the registration form
+document.getElementById('registrationButton').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent default behavior (if it's an anchor)
+    const registrationSection = document.getElementById('registrationSection');
+    if (registrationSection.style.display === 'none') {
+        registrationSection.style.display = 'block'; // Show the form
+       
+    } else {
+        registrationSection.style.display = 'none'; // Hide the form (optional toggle)
+    }
+});
+
 
 // Filter for Functionality of Status, Category, and Disposition
 document.querySelectorAll('.filter-dropdown').forEach(filter => {
@@ -71,7 +87,7 @@ document.getElementById('upload-image').addEventListener('change', function (eve
             return;
         }
 
-        // Create a FileReader to preview the image
+        // Create a FileReader to prev the image
         const reader = new FileReader();
         reader.onload = function (e) {
             const previewContainer = document.getElementById('preview-container');
@@ -107,9 +123,6 @@ document.getElementById('upload-btn').addEventListener('click', function () {
         alert('Please select an image before uploading.');
     }
 });
-
-
-
 
 // Details Button Functionality
 document.querySelectorAll('.details-btn').forEach(button => {
