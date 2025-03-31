@@ -48,12 +48,14 @@ Visit http://localhost:8080 to check that the website works.
 
 ## For Frontend work
 
-Before you start working with the code base, you need to start the
-Python virtual environment and run the server.
+Before you start working with the code base, you need to switch to the
+"frontend" git branch, start the Python virtual environment, and run
+the server.
 
 You do this by executing the following in the project root directory:
 
 ```
+git checkout frontend
 .\.env\Scripts\Activate.ps1
 python manage.py runserver 8080
 ```
@@ -70,12 +72,13 @@ https://docs.djangoproject.com/en/5.1/topics/templates/
 
 ## For Backend work
 
-Before you start working with the code base, you need to start the
-Python virtual environment.
+Before you start working with the code base, you need to switch to the
+"backend" git branch and start the Python virtual environment.
 
 You do this by executing the following in the project root directory:
 
 ```
+git checkout backend
 .\.env\Scripts\Activate.ps1
 ```
 
