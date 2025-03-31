@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Lost & Found Items</h1>
+<a href="{% url 'add_item' %}">Report New Item</a>
+
+{% for item in items %}
+    <div class="item">
+        <h3>{{ item.itemName }}</h3>
+        {% if item.photo %}
+            <img src="{{ item.photo.url }}" alt="{{ item.itemName }}" width="200">
+        {% endif %}
+        <p>Status: {{ item.get_status_display }}</p>
+        <p>Location: {{ item.location }}</p>
+        <p>Reported: {{ item.dateReported }}</p>
+    </div>
+{% endfor %}
+{% endblock %}
