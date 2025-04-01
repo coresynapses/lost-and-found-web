@@ -6,6 +6,11 @@ window.addEventListener('load', function () {
 });
 
 
+//return to main menu from log in screen option
+returnToMain.addEventListener("click", function () {
+    loginSection.style.display = "none"; // Simply hide the login form
+});
+
 // Search Bar Functionality for Item Cards
 document.getElementById('search-bar').addEventListener('input', function (e) {
     const query = e.target.value.toLowerCase();
@@ -17,7 +22,18 @@ document.getElementById('search-bar').addEventListener('input', function (e) {
     });
 });
 
-// Toggle visibility for report page
+//log in logic
+document.addEventListener("DOMContentLoaded", function () {
+    const loginButton = document.getElementById("loginButton");
+    const loginSection = document.getElementById("loginSection");
+
+    if (loginButton && loginSection) {
+        loginButton.addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent link from navigating away
+            loginSection.style.display = "block"; // Show login form
+        });
+    }
+});
 
 // Toggle visibility of the registration form
 document.getElementById('registrationButton').addEventListener('click', function (event) {

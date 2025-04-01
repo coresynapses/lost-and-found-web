@@ -10,10 +10,29 @@
 
     <h1>Lost and Found</h1>
     <header>
-    <nav>
-                <a href="#" class="btn btn-primary"
-                     id="registrationButton">Register</a>
+        <nav class="nav-buttons">
+            <a href="#" id="loginButton" class="btn btn-primary">Login</a>
+            <a href="#" id="registrationButton" class="btn btn-success">Register</a>
+        </nav>
     </nav>
+
+<!-- Login Form  -->
+<div class="login-section" id="loginSection">
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_username">Username:</label>
+        <input type="text" id="id_username" name="username" required>
+
+        <label for="id_password">Password:</label>
+        <input type="password" id="id_password" name="password" required>
+
+        <button type="submit" class="btn-primary">Login</button>
+    </form>
+    
+    <!-- Return to Main menu Button -->
+    <button id="returnToMain" class="btn-secondary">Return to Main Page</button>
+</div>
+
     <!-- Registration Form Section -->
 <div class="registration-section full-page" id="registrationSection" style="display: none;">
     
@@ -69,7 +88,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Dynamic rows populated via JavaScript -->
             </tbody>
         </table>
     </div>
@@ -78,7 +96,7 @@
     <div class="upload-container">
         <input type="file" id="upload-image" accept="image/*">
         <button id="upload-btn" class="details-btn">Upload Image</button>
-        <div id="preview-container"></div> <!-- For displaying the preview -->
+        <div id="preview-container"></div> <!-- for image preview  -->
     </div>
     
 
