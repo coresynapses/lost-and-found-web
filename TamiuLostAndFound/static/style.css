@@ -31,6 +31,208 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* login and register button style */
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+}
+
+/*log in*/
+.btn-primary {
+    background-color: #007bff;
+}
+.btn-primary {
+    right: 120px; /* log in slightly left */
+}
+
+
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/*register button*/
+.btn-success {
+    background-color: #28a745;
+}
+
+.btn-success {
+    right: 10px; /*register button far right style*/
+}
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.login-section {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Form Fields */
+.login-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.login-section input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Buttons */
+.login-section button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary {
+    background: blue;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: darkblue;
+}
+
+.btn-secondary {
+    background: gray;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: darkgray;
+}
+
+/*report page */
+#reportSection {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+}
+
+#reportSection h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #eaeaea;
+}
+
+
+/* registration page */
+
+
+
+.registration-section {
+    width: 400px; 
+    padding: 20px;
+    margin: 0 auto; 
+    background-color: #f9f9f9;
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+}
+
+
+.registration-section h2 {
+    text-align: center;
+    margin-bottom: 20px; 
+}
+
+.registration-section form {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 15px; 
+    width: 100%;
+}
+
+.registration-section form label {
+    display: block; 
+    text-align: left; 
+    width: 100%; 
+    font-weight: bold; 
+}
+
+.registration-section form input {
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+}
+
+.registration-section form button {
+    display: block;  
+    width: 60%;  
+    align-self: flex-end;
+    margin-right: -40px;
+    margin-top: 10px; 
+    position: relative; 
+}
+
+.registration-section form button:hover {
+    background-color: #0056b3; 
+}
+
+
 /*image upload */
 .upload-container {
     margin: 20px 0;

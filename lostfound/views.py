@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login
 from django.core.exceptions import PermissionDenied
+from django.conf import settings
 
 from .models import CustomUser, Item, claimRequestReport, fraudClaimReport  # Ensure all models are imported
 from .forms import CustomUserCreationForm, ItemForm, claimForm, fraudForm
@@ -10,6 +11,7 @@ from .forms import CustomUserCreationForm, ItemForm, claimForm, fraudForm
 def homepage(request):
     return render(request, 'homepage.html')
 
+'''
 def loginPage(request):
     return HttpResponse("This is the login page.")
 
@@ -19,22 +21,28 @@ def registerUser(request):
         if form.is_valid():
             user = form.save()
             login(request,user)
-            return redirect('itemList')
+            return redirect('register')
     else:
         form = CustomUserCreationForm()
 
-    return render(request, "registration/", {"form": form}) #needs HTML 
+    return render(request, "register2.html", {"form": form}) #needs HTML 
+'''
+
 
 #lists all items
 def itemList(request): 
     items = Item.objects.all().values(
+        'photo',
         'itemName',
         'status',
         'dateReported',
         'category__categoryName',
     )
     
-    return render(request, 'index.html', {'items': items})
+    return render(request, 'index.html', {
+        'items': items,
+        'MEDIA_URL': settings.MEDIA_URL,
+    })
 
 #provides details on one item, and can claim or report fraud on item.
 def itemDetail(request, item_id): 
@@ -62,7 +70,7 @@ def add_item(request):
             return redirect('itemDetail')
     else:
         form = ItemForm()
-    return render(request, 'lostfound/add_item.html', {'form': form})
+    return render(request, 'add_item.html', {'form': form})
 
 # edit item
 def editItem(request, item_id):

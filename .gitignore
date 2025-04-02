@@ -1,1 +1,8 @@
 __pycache__/
+.env/
+lostfound/migrations/
+LostAndFoundAndroid/migrations/
+
+.#*
+*.exe
+*.pyc
