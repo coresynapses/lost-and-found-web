@@ -23,12 +23,7 @@ from LostAndFoundAndroid import views
 
 urlpatterns = [
     path("", include("authentication.urls")),
-    path("register/", include("lostfound.urls")),
-    path("main/", include("lostfound.urls")),
-    path("report-item/", include("lostfound.urls")),
-    path("claim-request/", include("lostfound.urls")),
-    path("fraud-report/", include("lostfound.urls")),
-    path('homepage/',include("lostfound.urls")),
+    path("home/", include("lostfound.urls")),
     path('admin/', admin.site.urls),
     path("android/", views.android, name="android")
 ]

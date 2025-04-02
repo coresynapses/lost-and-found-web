@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from . models import CustomUser, Item, claimRequestReport, fraudClaimReport
 
+
+#User Creation
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required = True)
     first_name = forms.CharField(required = True)
@@ -11,6 +13,7 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = ('username','email','first_name','last_name','password1','password2')
 
+#User password change
 class CustomUserChangeForm(UserChangeForm):
     password = forms.CharField(
         widget= forms.PasswordInput(attrs={'placeholder': 'Enter new password.'}),

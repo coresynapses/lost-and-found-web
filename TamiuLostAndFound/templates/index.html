@@ -7,7 +7,48 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
+
     <h1>Lost and Found</h1>
+    <header>
+        <nav class="nav-buttons">
+            <a href="#" id="loginButton" class="btn btn-primary">Login</a>
+            <a href="#" id="registrationButton" class="btn btn-success">Register</a>
+        </nav>
+    </nav>
+
+<!-- Login Form  -->
+<div class="login-section" id="loginSection">
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_username">Username:</label>
+        <input type="text" id="id_username" name="username" required>
+
+        <label for="id_password">Password:</label>
+        <input type="password" id="id_password" name="password" required>
+
+        <button type="submit" class="btn-primary">Login</button>
+    </form>
+    
+    <!-- Return to Main menu Button -->
+    <button id="returnToMain" class="btn-secondary">Return to Main Page</button>
+</div>
+
+    <!-- Registration Form Section -->
+<div class="registration-section full-page" id="registrationSection" style="display: none;">
+    
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_username">username:</label>
+        {{ form.username }}
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="id_password1">Password:</label>
+        {{ form.password1 }}
+        <label for="id_password2">Confirm Password:</label>
+        {{ form.password2 }}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
 
     <!-- Search Bar -->
     <div class="search-container">
@@ -35,12 +76,21 @@
         </select>
     </div>
 
+
     <!--Image upload-->
     <div class="upload-container">
         <input type="file" id="upload-image" accept="image/*">
         <button id="upload-btn" class="details-btn">Upload Image</button>
-        <div id="preview-container"></div> <!-- For displaying the preview -->
+        
+
+        <!--Item Upload Button. Not working yet!-->
+        <a href="{% url 'lostfound:add_item' %}" class="btn btn-info">Add Item</a>
+
+        <div id="preview-container"></div> <!-- for image preview  -->
     </div>
+
+    
+
     
 
     <!-- Grid-based Item Display -->
@@ -50,7 +100,7 @@
              data-status="{{ item.status|lower }}" 
              data-category="{{ item.category__categoryName|lower }}" 
              data-disposition="{{ item.dateClaimed|yesno:'claimed,unclaimed' }}">
-            <img src="{{ item.photo }}" alt="{{ item.itemName }}">
+            <img src="{{ MEDIA_URL }}{{ item.photo }}" alt="{{ item.itemName }}" width="200">
             <h3 class="itemName">{{ item.itemName }}</h3>
             <p>Status: {{ item.status }}</p>
             <p>Category: {{ item.category__categoryName }}</p>

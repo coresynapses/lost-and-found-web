@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
+from lostfound.forms import CustomUserCreationForm
+from lostfound.models import CustomUser
+from django.urls import reverse
 
 
 def home(request):
@@ -13,41 +15,61 @@ def login_page(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        if not User.objects.filter(username=username).exists():
+        if not CustomUser.objects.filter(username=username).exists():
             messages.error(request, 'Invalid Username')
-            return redirect('/login/')
+            return redirect('login')
 
         user = authenticate(username=username, password=password)
         if user is None:
-            messages.error(request, "Invalid Password")
-            return redirect('/login/')
+            messages.error(request, "Invalid username or Password")
+            return redirect('login')
         else:
             login(request, user)
-            return redirect('/home/')
+            return redirect(reverse('lostfound:itemList'))
 
     return render(request, 'login.html')
 
 
 def register_page(request):
-    if request.method == 'POST':
+    '''
+        if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        username = request.POST.get('username')
+        username = request.POST.get('email')
         password = request.POST.get('password')
 
-        if User.objects.filter(username=username).exists():
+        if CustomUser.objects.filter(username=username).exists():
             messages.info(request, "Username already taken!")
-            return redirect('/register/')
+            return redirect('register')
 
-        user = User.objects.create_user(
+        user = CustomUser.objects.create_user(
             first_name=first_name,
             last_name=last_name,
-            username=username
+            username=username,
+            password=password  # Directly set during creation
         )
         user.set_password(password)
         user.save()
 
         messages.info(request, "Account created Successfully!")
-        return redirect('/register/')
+        return redirect('login')
+    '''
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            print("User registered:", user)  # Debugging
+            login(request, user)
+            return redirect("home")  
+        else:
+            print("Form errors:", form.errors)  # Debugging
+            messages.error(request,'Invalid username or password')
+    else:
+        
+        form = CustomUserCreationForm()
 
-    return render(request, 'register.html')
+    return render(request, 'register.html',{"form": form})
+
+def logout(request):
+    logout(request)
+    return redirect('login')
