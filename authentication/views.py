@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from lostfound.forms import CustomUserCreationForm
 from lostfound.models import CustomUser
 from django.urls import reverse
@@ -70,6 +70,6 @@ def register_page(request):
 
     return render(request, 'register.html',{"form": form})
 
-def logout(request):
+def logout_user(request):
     logout(request)
-    return redirect('login')
+    return redirect('/')  # You can change 'homepage' to your desired route

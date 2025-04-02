@@ -1,5 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +9,20 @@
 </head>
 <body>
 
-    <h1>Lost and Found</h1>
-    <header>
-        <nav class="nav-buttons">
+<h1>Lost and Found</h1>
+
+<header>
+    <nav class="nav-buttons">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        {% else %}
             <a href="#" id="loginButton" class="btn btn-primary">Login</a>
             <a href="#" id="registrationButton" class="btn btn-success">Register</a>
-        </nav>
+        {% endif %}
     </nav>
+</header>
 
-<!-- Login Form  -->
+<!-- Login Form -->
 <div class="login-section" id="loginSection">
     <form method="post">
         {% csrf_token %}
@@ -28,17 +34,16 @@
 
         <button type="submit" class="btn-primary">Login</button>
     </form>
-    
+
     <!-- Return to Main menu Button -->
     <button id="returnToMain" class="btn-secondary">Return to Main Page</button>
 </div>
 
-    <!-- Registration Form Section -->
+<!-- Registration Form Section -->
 <div class="registration-section full-page" id="registrationSection" style="display: none;">
-    
     <form method="post">
         {% csrf_token %}
-        <label for="id_username">username:</label>
+        <label for="id_username">Username:</label>
         {{ form.username }}
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
@@ -50,65 +55,61 @@
     </form>
 </div>
 
-    <!-- Search Bar -->
-    <div class="search-container">
-        <input type="text" id="search-bar" placeholder="Search item here...">
+<!-- Search Bar -->
+<div class="search-container">
+    <input type="text" id="search-bar" placeholder="Search item here...">
+</div>
+
+<!-- Filters -->
+<div class="filters">
+    <select id="status-filter" class="filter-dropdown">
+        <option value="all">All Statuses</option>
+        <option value="lost">Lost</option>
+        <option value="found">Found</option>
+    </select>
+    <select id="category-filter" class="filter-dropdown">
+        <option value="all">All Categories</option>
+        <option value="electronics">Electronics</option>
+        <option value="jewelry">Jewelry</option>
+        <option value="clothing">Clothing</option>
+        <option value="other">Other</option>
+    </select>
+    <select id="disposition-filter" class="filter-dropdown">
+        <option value="all">All Dispositions</option>
+        <option value="claimed">Claimed</option>
+        <option value="unclaimed">Unclaimed</option>
+    </select>
+</div>
+
+<!-- Image upload -->
+<div class="upload-container">
+    <input type="file" id="upload-image" accept="image/*">
+    <button id="upload-btn" class="details-btn">Upload Image</button>
+
+    <!-- Item Upload Button -->
+    <a href="{% url 'lostfound:add_item' %}" class="btn btn-info">Add Item</a>
+
+    <div id="preview-container"></div>
+</div>
+
+<!-- Grid-based Item Display -->
+<div class="item-container">
+    {% for item in items %}
+    <div class="Item"
+         data-status="{{ item.status|lower }}"
+         data-category="{{ item.category__categoryName|lower }}"
+         data-disposition="{{ item.dateClaimed|yesno:'claimed,unclaimed' }}">
+        <img src="{{ MEDIA_URL }}{{ item.photo }}" alt="{{ item.itemName }}" width="200">
+        <h3 class="itemName">{{ item.itemName }}</h3>
+        <p>Status: {{ item.status }}</p>
+        <p>Category: {{ item.category__categoryName }}</p>
+        <p>Date Reported: {{ item.dateReported }}</p>
+        <p>Disposition: {{ item.dateClaimed|default:"Unclaimed" }}</p>
+        <button class="details-btn" data-item-id="{{ item.itemID }}">Details</button>
     </div>
+    {% endfor %}
+</div>
 
-    <!-- Filters -->
-    <div class="filters">
-        <select id="status-filter" class="filter-dropdown">
-            <option value="all">All Statuses</option>
-            <option value="lost">Lost</option>
-            <option value="found">Found</option>
-        </select>
-        <select id="category-filter" class="filter-dropdown">
-            <option value="all">All Categories</option>
-            <option value="electronics">Electronics</option>
-            <option value="jewelry">Jewelry</option>
-            <option value="clothing">Clothing</option>
-            <option value="other">Other</option>
-        </select>
-        <select id="disposition-filter" class="filter-dropdown">
-            <option value="all">All Dispositions</option>
-            <option value="claimed">Claimed</option>
-            <option value="unclaimed">Unclaimed</option>
-        </select>
-    </div>
-
-
-    <!--Image upload-->
-    <div class="upload-container">
-        <input type="file" id="upload-image" accept="image/*">
-        <button id="upload-btn" class="details-btn">Upload Image</button>
-        
-
-        <!--Item Upload Button. Not working yet!-->
-        <a href="{% url 'lostfound:add_item' %}" class="btn btn-info">Add Item</a>
-
-        <div id="preview-container"></div> <!-- for image preview  -->
-    </div>
-
-    
-
-    
-
-    <!-- Grid-based Item Display -->
-    <div class="item-container">
-        {% for item in items %}
-        <div class="Item" 
-             data-status="{{ item.status|lower }}" 
-             data-category="{{ item.category__categoryName|lower }}" 
-             data-disposition="{{ item.dateClaimed|yesno:'claimed,unclaimed' }}">
-            <img src="{{ MEDIA_URL }}{{ item.photo }}" alt="{{ item.itemName }}" width="200">
-            <h3 class="itemName">{{ item.itemName }}</h3>
-            <p>Status: {{ item.status }}</p>
-            <p>Category: {{ item.category__categoryName }}</p>
-            <p>Date Reported: {{ item.dateReported }}</p>
-            <p>Disposition: {{ item.dateClaimed|default:"Unclaimed" }}</p>
-            <button class="details-btn" data-item-id="{{ item.itemID }}">Details</button>
-        </div>
-        {% endfor %}
-    </div>
-
-    <script src="{% static 'dynamic.js' %}"></script>
+<script src="{% static 'dynamic.js' %}"></script>
+</body>
+</html>
