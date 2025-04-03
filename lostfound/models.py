@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 
+
+
 class CustomUser(AbstractUser):
     def searchItem(self,query):
         return Item.objects.filter(itemName__icontains=query) | Item.objects.filter(description__icontains=query)
@@ -99,6 +101,9 @@ class itemReport(models.Model):
             for item in self.reportedItems.all()
         ])
 '''
+
+
+
 
 class claimRequestReport(models.Model):
     pending = "Pending"

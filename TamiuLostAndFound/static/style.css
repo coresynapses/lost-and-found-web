@@ -72,6 +72,8 @@ h1 {
     background-color: #218838;
 }
 
+/* log in form*/
+
 .login-section {
     display: none;
     position: fixed;
@@ -118,6 +120,8 @@ h1 {
 .btn-primary {
     background: blue;
     color: white;
+    padding: 10px 20px;
+    width: auto;
 }
 
 .btn-primary:hover {
@@ -133,52 +137,80 @@ h1 {
     background: darkgray;
 }
 
-/*report page */
-#reportSection {
+#loginSection, #registrationSection {
+    display: none;
+}
+
+
+/* Report Form */
+.report-container {
+    background: white;
+    width: 60%;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 800px;
-}
-
-#reportSection h2 {
-    color: #333;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .report-container h2 {
     margin-bottom: 15px;
-    font-size: 24px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table th, table td {
-    border: 1px solid #ccc;
-    padding: 10px;
+    text-align: center;
+  }
+  
+  .form-row {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: 10px;
+  }
+  
+  .form-row label {
+    width: 30%; 
     text-align: left;
-}
-
-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-table tr:hover {
-    background-color: #eaeaea;
-}
-
-
+    padding-top: 5px; 
+  }
+  
+  .form-row input, .form-row textarea, .form-row select {
+    width: 70%; 
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .form-row textarea {
+    height: 80px; 
+  }
+  
+  .form-row input[type="file"] {
+    padding: 5px;
+  }
+  
+  .report-container .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px; 
+  }
+  
+  /* Style the buttons inside the button-container */
+  .report-container .button-container button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px; 
+  }
+  
+  
+  .report-container .report-btn-primary {
+    background-color: #ff0000;
+    color: white;
+  }
+  
+  .report-container .report-btn-secondary {
+    background-color: gray;
+    color: white;
+  }
 /* registration page */
-
-
 
 .registration-section {
     width: 400px; 
@@ -230,6 +262,23 @@ table tr:hover {
 
 .registration-section form button:hover {
     background-color: #0056b3; 
+    width: 20;
+}
+
+/*report button*/
+
+.report-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 50px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.report-btn:hover {
+    background-color: darkred;
 }
 
 

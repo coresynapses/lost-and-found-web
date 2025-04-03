@@ -14,5 +14,5 @@ def index(request):
     else:
         form = UserCreationForm()  # Display an empty form for GET requests
 
-    # Pass the form to the template
+    # form passed to django template
     return render(request, 'index.html', {'form': form})

@@ -11,8 +11,9 @@
     <h1>Lost and Found</h1>
     <header>
         <nav class="nav-buttons">
-            <a href="#" id="loginButton" class="btn btn-primary">Login</a>
-            <a href="#" id="registrationButton" class="btn btn-success">Register</a>
+            <button href="#" id="loginButton" class="btn btn-primary">Login</button>
+            <button href="#" id="registrationButton" class="btn btn-success">Register</button>
+            <button id="reportBtn" class="report-btn btn btn-danger">Report</button>
         </nav>
     </nav>
 
@@ -33,7 +34,7 @@
     <button id="returnToMain" class="btn-secondary">Return to Main Page</button>
 </div>
 
-    <!-- Registration Form Section -->
+<!-- Registration Form Section -->
 <div class="registration-section full-page" id="registrationSection" style="display: none;">
     
     <form method="post">
@@ -47,6 +48,44 @@
         <label for="id_password2">Confirm Password:</label>
         {{ form.password2 }}
         <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+
+<div class="report-container" id="reportForm" style="display: none;">
+    <h2>Report</h2>
+    <div class="form-row">
+        <label for="itemName">Item Name:</label>
+        <input type="text" id="itemName" name="itemName">
+    </div>
+    <div class="form-row">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea>
+    </div>
+    <div class="form-row">
+        <label for="category">Category:</label>
+        <select id="category" name="category"></select>
+    </div>
+    <div class="form-row">
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location">
+    </div>
+    <div class="form-row">
+        <label for="uploadImage">Upload Image:</label>
+        <input type="file" id="uploadImage" name="uploadImage">
+    </div>
+    <div class="form-row">
+        <label for="status">Status:</label>
+        <select id="status" name="status"></select>
+    </div>
+    <div class="form-row">
+        <label for="contactInfo">Contact Information:</label>
+        <textarea id="contactInfo" name="contactInfo"></textarea>
+    </div>
+    <div class="button-container">
+        <button type="submit" class="report-btn-primary">Report</button>
+        <button type="button" class="report-btn-secondary">Cancel</button>
+    </div>
+</div>
     </form>
 </div>
 
@@ -75,29 +114,7 @@
             <option value="unclaimed">Unclaimed</option>
         </select>
     </div>
-
-    <div id="reportSection" style="display: none;">
-        <h2>Reports</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Item Name</th>
-                    <th>Reported Status</th>
-                    <th>Category</th>
-                    <th>Date Reported</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
     
-    <!--Image upload-->
-    <div class="upload-container">
-        <input type="file" id="upload-image" accept="image/*">
-        <button id="upload-btn" class="details-btn">Upload Image</button>
-        <div id="preview-container"></div> <!-- for image preview  -->
-    </div>
     
 
     <!-- Grid-based Item Display -->
@@ -119,3 +136,4 @@
     </div>
 
     <script src="{% static 'dynamic.js' %}"></script>
+</body>
