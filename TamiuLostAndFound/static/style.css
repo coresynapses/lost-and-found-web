@@ -1,3 +1,28 @@
+header {
+    background-color: #C0C0C0C0; 
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header-banner {
+    background-color: #800000;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.header-banner p {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* background main page*/
 body {
     font-family: Arial, sans-serif;
     background-color: #aaa9ad;
@@ -31,30 +56,44 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* login and register button style */
-.btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
+/*report button*/
+
+.report-btn {
+    background-color: red;
     color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 50px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    position: absolute; 
-    top: 10px; 
-    right: 10px; 
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.report-btn:hover {
+    background-color: darkred;
+}
+
+
+.nav-buttons {
+    display: flex;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 50px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 /*log in*/
 .btn-primary {
     background-color: #007bff;
+    color: white;
+    right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    min-height: 32px;
+    margin-right: 15px;
 }
-.btn-primary {
-    right: 120px; /* log in slightly left */
-}
-
-
 
 .btn-primary:hover {
     background-color: #0056b3;
@@ -63,11 +102,15 @@ h1 {
 /*register button*/
 .btn-success {
     background-color: #28a745;
+    color: white;
+    right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    min-height: 32px;
+    margin-right: 15px;
 }
 
-.btn-success {
-    right: 10px; /*register button far right style*/
-}
 .btn-success:hover {
     background-color: #218838;
 }
@@ -264,23 +307,6 @@ h1 {
     background-color: #0056b3; 
     width: 20;
 }
-
-/*report button*/
-
-.report-btn {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    margin-top: 50px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.report-btn:hover {
-    background-color: darkred;
-}
-
 
 /*image upload */
 .upload-container {
