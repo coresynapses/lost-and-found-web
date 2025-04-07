@@ -3,30 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title style="color: maroon;">Welcome to Lost and Found</title>
+    <title>Lost and Found</title>
     <style>
-        .container {
+        body {
+            font-family: Cambria, sans-serif;
+            margin: 10;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #F5F5DC;
+            
+        }
+        header, footer {
+            background: #0B1957;
+            width: 100%;
             text-align: center;
-            margin: 100px auto;
-            max-width: 500px;
             padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-        h1 {
-            color: green;
-            font-weight: bold;
+        nav {
+            background: #426BC2;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
         }
-        img {
-            width: 60%;
+        main {
+            display: flex;
+            width: 80%;
+            margin: 20px;
+           
         }
+        article {
+            flex: 2;
+            background: #E8D9ED;
+            padding: 15px;
+            
+        }
+        section {
+            display:flex;
+            flex-direction:column;
+            background: #D2B3DB;
+            margin: 10px;
+            padding: 10px;
+            
+        }
+        
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 style="color: maroon; font-weight: bold;">Welcome to Lost and Found 😃</h1>
-        <img src="https://inside.nku.edu/content/inside/studentaffairs/departments/studentunion/building-services/lost-and-found/_jcr_content/image.img.png/1123864896.jpg" alt="Welcome Cartoon">
-    </div>
+    <header>
+        <h1><font color="white">Welcome to Lost and Found!</font></h1>
+
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Report Lost or Found Item</a>
+        <a href="#">Make a claim</a>
+        <a href="#">Login</a>
+    </nav>
+
+    <h3>Every day, many items are lost and found. Our website allows provides an efficient platform through a grid based 
+        system to report and claim lost and found items with pictures and descriptions to get them back to their owners. </h3>
+    
+    
+    <main>
+        <article>
+            <h2>Our Features:</h2>
+            <section>
+                <h2>Report Items</h2>
+                <p>List of items recently reported as lost.</p>
+            </section>
+            <section>
+                <h2>Claim Items</h2>
+                <p>List of items recently reported as found.</p>
+            </section>
+            <section>
+                <h2>Report Fradulent Claims</h2>
+                <p>Report any misuse of the website.</p>
+            </section>
+        </article>
+        
+    </main>
+    
+    <footer>
+    </footer>
 </body>
 </html>
