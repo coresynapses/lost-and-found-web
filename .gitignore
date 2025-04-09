@@ -1,8 +1,36 @@
-__pycache__/
-.env/
-lostfound/migrations/
-LostAndFoundAndroid/migrations/
+# By default, .gitignore blacklists items.
+# By adding '*', .gitignore blacklists everything.
+# This means we need to whitelist files AND directories manually.
+*
 
-.#*
-*.exe
-*.pyc
+# Text-based documents
+!*.md
+!*.txt
+
+# Code
+!*.py
+!*.html
+!*.css
+!*.js
+
+# Images
+!*.jpeg
+!*.jpg
+!*.png
+!*.webp
+
+# Directories
+!TamiuLostAndFound
+!TamiuLostAndFound/static
+!TamiuLostAndFound/templates
+
+!lostfound
+!lostfound/templates
+
+!LostAndFoundAndroid
+
+!authentication
+!authentication/templates
+
+!media/
+!media/item_photos
