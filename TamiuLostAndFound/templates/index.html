@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lost and Found</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    
 </head>
 <body>
 
@@ -16,13 +17,12 @@
         {% if user.is_authenticated %}
             <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
         {% else %}
-            <a href="#" id="loginButton" class="btn btn-primary">Login</a>
-            <a href="#" id="registrationButton" class="btn btn-success">Register</a>
+            <a href="/login/" id="loginButton" class="btn btn-primary">Login</a>
+            <a href="/register/" id="registrationButton" class="btn btn-success">Register</a>
         {% endif %}
     </nav>
 </header>
-
-<!-- Login Form -->
+<!--Login Form
 <div class="login-section" id="loginSection">
     <form method="post">
         {% csrf_token %}
@@ -35,11 +35,13 @@
         <button type="submit" class="btn-primary">Login</button>
     </form>
 
-    <!-- Return to Main menu Button -->
+    Return to Main menu Button
     <button id="returnToMain" class="btn-secondary">Return to Main Page</button>
 </div>
+-->
 
-<!-- Registration Form Section -->
+
+<!-- Registration Form Section
 <div class="registration-section full-page" id="registrationSection" style="display: none;">
     <form method="post">
         {% csrf_token %}
@@ -54,6 +56,7 @@
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>
+-->
 
 <!-- Search Bar -->
 <div class="search-container">
