@@ -5,11 +5,23 @@ window.addEventListener('load', function () {
     console.log('Lost and Found');
 });
 
+// Select elements
+const loginButton = document.getElementById("loginButton");
+const registrationButton = document.getElementById("registrationButton");
+const reportButton = document.getElementById("reportButton"); 
+const returnToMainButton = document.getElementById("returnToMain");
+const loginSection = document.getElementById("loginSection");
+const registrationSection = document.getElementById("registrationSection");
+const reportSection = document.getElementById("reportSection");
+const mainContent = document.querySelector(".item-container");
+
 
 //return to main menu from log in screen option
 returnToMain.addEventListener("click", function () {
     loginSection.style.display = "none"; // Simply hide the login form
 });
+
+
 
 // Search Bar Functionality for Item Cards
 document.getElementById('search-bar').addEventListener('input', function (e) {
@@ -22,31 +34,43 @@ document.getElementById('search-bar').addEventListener('input', function (e) {
     });
 });
 
-//log in logic
+
 document.addEventListener("DOMContentLoaded", function () {
     const loginButton = document.getElementById("loginButton");
+    const registrationButton = document.getElementById("registrationButton");
     const loginSection = document.getElementById("loginSection");
+    const registrationSection = document.getElementById("registrationSection");
+    const reportSection = document.getElementById("reportForm");
 
     if (loginButton && loginSection) {
-        loginButton.addEventListener("click", function (event) {
-            event.preventDefault(); // Prevent link from navigating away
-            loginSection.style.display = "block"; // Show login form
+        loginButton.addEventListener("click", function () {
+            loginSection.style.display = loginSection.style.display === "block" ? "none" : "block";
+            registrationSection.style.display = "none"; // Hide registration when login is clicked
+            reportSection.style.display = "none"; // Hide report when login is clicked
         });
     }
-});
 
-// Toggle visibility of the registration form
-document.getElementById('registrationButton').addEventListener('click', function (event) {
-    event.preventDefault(); // Prevent default behavior (if it's an anchor)
-    const registrationSection = document.getElementById('registrationSection');
-    if (registrationSection.style.display === 'none') {
-        registrationSection.style.display = 'block'; // Show the form
-       
-    } else {
-        registrationSection.style.display = 'none'; // Hide the form (optional toggle)
+    if (registrationButton && registrationSection) {
+        registrationButton.addEventListener("click", function () {
+            registrationSection.style.display = registrationSection.style.display === "block" ? "none" : "block";
+            loginSection.style.display = "none"; // Hide login when registration is clicked
+            reportSection.style.display = "none"; // Hide report when registration is clicked
+        });
     }
+
 });
 
+const reportForm = document.getElementById("reportForm");
+const showReportButton = document.getElementById("reportBtn");
+const cancelButton = document.querySelector(".report-btn-secondary");
+
+showReportButton.addEventListener("click", function() {
+    reportForm.style.display = "block";
+});
+
+cancelButton.addEventListener("click", function() {
+    reportForm.style.display = "none";
+});
 
 // Filter for Functionality of Status, Category, and Disposition
 document.querySelectorAll('.filter-dropdown').forEach(filter => {
@@ -75,16 +99,15 @@ document.getElementById('upload-image').addEventListener('change', function (eve
     const file = event.target.files[0];
 
     if (file) {
-        // Check if the file is an image
         if (!file.type.startsWith('image/')) {
             alert('Please upload a valid image file.');
             return;
         }
 
-        // Create a FileReader to preview the image
+        // Create a FileReader prev image
         const reader = new FileReader();
         reader.onload = function (e) {
-            // Display the preview
+            // Display the prev
             const previewContainer = document.getElementById('preview-container');
             previewContainer.innerHTML = `<img src="${e.target.result}" alt="Preview Image">`;
         };
