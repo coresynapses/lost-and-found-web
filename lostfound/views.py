@@ -1,6 +1,7 @@
 from django.shortcuts import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.core.exceptions import PermissionDenied
 from django.conf import settings
@@ -29,19 +30,24 @@ def registerUser(request):
 '''
 
 
-#lists all items
-def itemList(request): 
-    items = Item.objects.all().values(
-        'photo',
-        'itemName',
-        'status',
-        'dateReported',
-        'category__categoryName',
-    )
+#lists all items and filters through item name, or description
+def itemList(request):
+    query = request.GET.get('query')
+    if query:
+        items = Item.objects.filter(itemName__icontains=query) | Item.objects.filter(description__icontains=query)
+    else:
+        items = Item.objects.all().values(
+            'photo',
+            'itemName',
+            'status',
+            'dateReported',
+            'category__categoryName',
+        )
     
     return render(request, 'index.html', {
         'items': items,
         'MEDIA_URL': settings.MEDIA_URL,
+        'query': query,
     })
 
 #provides details on one item, and can claim or report fraud on item.
@@ -61,7 +67,9 @@ def itemDetail(request, item_id):
 
     return render(request, '', context) #needs HTML
 
-#item creation
+#item creation, only members can create a report, 
+#if they are not logged in it will redirect them to the login page
+@login_required(login_url='login')
 def add_item(request):
     if request.method == 'POST':
         form = ItemForm(request.POST, request.FILES)
@@ -73,6 +81,7 @@ def add_item(request):
     return render(request, 'add_item.html', {'form': form})
 
 # edit item
+@login_required(login_url='login')
 def editItem(request, item_id):
     item = get_object_or_404(Item, id = item_id)
 
@@ -87,6 +96,7 @@ def editItem(request, item_id):
     return render(request, '', {'form': form, 'item': item})#needs HTML
 
 #item deletion
+@login_required(login_url='login')
 def deleteItem(request, item_id):
     item = get_object_or_404(Item, id = item_id)
 
@@ -100,6 +110,7 @@ def deleteItem(request, item_id):
     return render(request, '', {'item': item}) #needs HTML
 
 #claims creation
+@login_required(login_url='login')
 def claimRequest(request, item_id):
     item = get_object_or_404(Item, id=item_id)
 
@@ -117,6 +128,7 @@ def claimRequest(request, item_id):
     return render(request,'' ,{'form': form, 'item': item}) #needs HTML
 
 #edit claim
+@login_required(login_url='login')
 def editClaim(request, claim_id):
     claim = get_object_or_404(claimRequestReport, id = claim_id)
 
@@ -134,6 +146,7 @@ def editClaim(request, claim_id):
     return render(request, '', {'form': form, 'claim' : claim}) #needs HTML
 
 #delete claim
+@login_required(login_url='login')
 def deleteClaim(request, claim_id):
     claim = get_object_or_404(claimRequestReport, id = claim_id)
 
@@ -151,6 +164,7 @@ def deleteClaim(request, claim_id):
     return render(request, '', {'claim': claim}) #needs HTML
 
 #fraud creation
+@login_required(login_url='login')
 def fraudReport(request, item_id):
     item = get_object_or_404(Item, id=item_id)
 
@@ -168,6 +182,7 @@ def fraudReport(request, item_id):
     return render(request,'',{'form':form, 'item': item}) #needs HTML
 
 #edit fraud claim
+@login_required(login_url='login')
 def editFraud(request, fraud_id):
     fraud = get_object_or_404(fraudClaimReport, id = fraud_id)
     
@@ -186,6 +201,7 @@ def editFraud(request, fraud_id):
     return render(request, '', {'form': form, 'fraud': fraud})
 
 #delete fraud claim
+@login_required(login_url='login')
 def deleteFraud(request, fraud_id):
     fraud = get_object_or_404(fraudClaimReport, id = fraud_id)
 

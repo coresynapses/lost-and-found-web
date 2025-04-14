@@ -60,16 +60,15 @@ def register_page(request):
             user = form.save()
             print("User registered:", user)  # Debugging
             login(request, user)
-            return redirect("home")  
+            return redirect(reverse('lostfound:itemList'))
         else:
             print("Form errors:", form.errors)  # Debugging
             messages.error(request,'Invalid username or password')
     else:
-        
         form = CustomUserCreationForm()
 
     return render(request, 'register.html',{"form": form})
 
 def logout_user(request):
     logout(request)
-    return redirect('/')  # You can change 'homepage' to your desired route
+    return redirect('home')
