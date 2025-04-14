@@ -1,28 +1,4 @@
-header {
-    background-color: #C0C0C0C0; 
-    color: white;
-    text-align: center;
-    padding: 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.header-banner {
-    background-color: #800000;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.header-banner p {
-    display: flex;
-    flex-direction: column; 
-    width: 100%;
-    overflow-x: hidden;
-}
-
-/* background main page*/
+/* Global Style */
 body {
     font-family: Arial, sans-serif;
     background-color: #aaa9ad;
@@ -31,6 +7,137 @@ body {
     text-align: center;
 }
 
+/* Page visibility utility */
+.page.hidden {
+    display: none;
+}
+
+/* Header Style */
+header,
+.header,
+.header-banner {
+    background-color: maroon;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.header img {
+    height: 50px;
+}
+
+.header .right {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.header button, .account {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.account {
+    font-size: 24px;
+}
+
+/* Claim Page Style */
+.container {
+    padding: 20px;
+    text-align: center;
+}
+
+#claim-page .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    background: white;
+    max-width: 400px;
+    width: 100%;
+}
+
+.navigation {
+    margin-top: 20px;
+}
+
+button {
+    background: #58122a;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: opacity 0.3s;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Claim Proof Page */
+.claim-proof {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 15px;
+    background: white;
+    width: 300px;
+    margin: auto;
+    border-radius: 8px;
+}
+
+.claim-proof textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    resize: none;
+}
+
+.claim-btn {
+    background-color: green;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.claim-btn:hover {
+    background-color: darkgreen;
+}
+
+/* Homepage, Login, Register, and Report Style */
 h1 {
     color: #333;
     margin-bottom: 20px;
@@ -56,8 +163,6 @@ h1 {
     margin-bottom: 20px;
 }
 
-/*report button*/
-
 .report-btn {
     background-color: red;
     color: white;
@@ -73,21 +178,17 @@ h1 {
     background-color: darkred;
 }
 
-
 .nav-buttons {
     display: flex;
-    border: none;
     padding: 8px 12px;
     margin-top: 50px;
     cursor: pointer;
     border-radius: 5px;
 }
 
-/*log in*/
 .btn-primary {
     background-color: #007bff;
     color: white;
-    right: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -99,11 +200,9 @@ h1 {
     background-color: #0056b3;
 }
 
-/*register button*/
 .btn-success {
     background-color: #28a745;
     color: white;
-    right: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -115,8 +214,6 @@ h1 {
     background-color: #218838;
 }
 
-/* log in form*/
-
 .login-section {
     display: none;
     position: fixed;
@@ -124,8 +221,6 @@ h1 {
     left: 50%;
     transform: translate(-50%, -50%);
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     background: white;
     padding: 30px;
     border-radius: 8px;
@@ -134,14 +229,15 @@ h1 {
     max-width: 400px;
 }
 
-/* Form Fields */
-.login-section label {
+.login-section label,
+.registration-section form label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-.login-section input {
+.login-section input,
+.registration-section form input {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
@@ -149,26 +245,12 @@ h1 {
     border-radius: 4px;
 }
 
-/* Buttons */
 .login-section button {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.btn-primary {
-    background: blue;
-    color: white;
-    padding: 10px 20px;
-    width: auto;
-}
-
-.btn-primary:hover {
-    background: darkblue;
 }
 
 .btn-secondary {
@@ -184,6 +266,36 @@ h1 {
     display: none;
 }
 
+.registration-section {
+    width: 400px;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.registration-section h2 {
+    margin-bottom: 20px;
+}
+
+.registration-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.registration-section form button {
+    align-self: flex-end;
+    margin-right: -40px;
+    margin-top: 10px;
+}
+
+.registration-section form button:hover {
+    background-color: #0056b3;
+}
 
 /* Report Form */
 .report-container {
@@ -193,122 +305,62 @@ h1 {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .report-container h2 {
+}
+
+.report-container h2 {
     margin-bottom: 15px;
-    text-align: center;
-  }
-  
-  .form-row {
+}
+
+.form-row {
     display: flex;
-    align-items: flex-start; /* Align items to the top */
+    align-items: flex-start;
     margin-bottom: 10px;
-  }
-  
-  .form-row label {
-    width: 30%; 
+}
+
+.form-row label {
+    width: 30%;
     text-align: left;
-    padding-top: 5px; 
-  }
-  
-  .form-row input, .form-row textarea, .form-row select {
-    width: 70%; 
+    padding-top: 5px;
+}
+
+.form-row input,
+.form-row textarea,
+.form-row select {
+    width: 70%;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 14px;
-  }
-  
-  .form-row textarea {
-    height: 80px; 
-  }
-  
-  .form-row input[type="file"] {
-    padding: 5px;
-  }
-  
-  .report-container .button-container {
+}
+
+.form-row textarea {
+    height: 80px;
+}
+
+.report-container .button-container {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px; 
-  }
-  
-  /* Style the buttons inside the button-container */
-  .report-container .button-container button {
+    margin-top: 20px;
+}
+
+.report-container .button-container button {
     padding: 8px 20px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px; 
-  }
-  
-  
-  .report-container .report-btn-primary {
+    margin-left: 10px;
+}
+
+.report-btn-primary {
     background-color: #ff0000;
     color: white;
-  }
-  
-  .report-container .report-btn-secondary {
+}
+
+.report-btn-secondary {
     background-color: gray;
     color: white;
-  }
-/* registration page */
-
-.registration-section {
-    width: 400px; 
-    padding: 20px;
-    margin: 0 auto; 
-    background-color: #f9f9f9;
-    border: 1px solid #ccc; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    text-align: center;
 }
 
-
-.registration-section h2 {
-    text-align: center;
-    margin-bottom: 20px; 
-}
-
-.registration-section form {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    gap: 15px; 
-    width: 100%;
-}
-
-.registration-section form label {
-    display: block; 
-    text-align: left; 
-    width: 100%; 
-    font-weight: bold; 
-}
-
-.registration-section form input {
-    width: 100%; 
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px; 
-}
-
-.registration-section form button {
-    display: block;  
-    width: 60%;  
-    align-self: flex-end;
-    margin-right: -40px;
-    margin-top: 10px; 
-    position: relative; 
-}
-
-.registration-section form button:hover {
-    background-color: #0056b3; 
-    width: 20;
-}
-
-/*image upload */
+/* Image Upload Style */
 .upload-container {
     margin: 20px 0;
     text-align: center;
@@ -326,6 +378,7 @@ h1 {
     margin-top: 10px;
 }
 
+/* Filter and Item Card */
 .filter-dropdown {
     padding: 8px;
     border: 1px solid #ccc;
