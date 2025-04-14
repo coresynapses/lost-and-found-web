@@ -10,6 +10,7 @@ def home(request):
     return render(request, 'home.html')
 
 
+
 def login_page(request):
     if request.method == "POST":
         username = request.POST.get('username')
