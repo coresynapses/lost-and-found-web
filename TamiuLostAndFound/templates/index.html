@@ -15,7 +15,7 @@
 <header>
     <nav class="nav-buttons">
         {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            <a href="{% url 'lostfound:logout' %}" class="btn btn-danger">Logout</a>
         {% else %}
             <a href="/login/" id="loginButton" class="btn btn-primary">Login</a>
             <a href="/register/" id="registrationButton" class="btn btn-success">Register</a>
@@ -98,15 +98,15 @@
     {% for item in items %}
     <div class="Item"
          data-status="{{ item.status|lower }}"
-         data-category="{{ item.category__categoryName|lower }}"
+         data-category="{{ item.category|lower }}"
          data-disposition="{{ item.dateClaimed|yesno:'claimed,unclaimed' }}">
         <img src="{{ MEDIA_URL }}{{ item.photo }}" alt="{{ item.itemName }}" width="200">
         <h3 class="itemName">{{ item.itemName }}</h3>
         <p>Status: {{ item.status }}</p>
-        <p>Category: {{ item.category__categoryName }}</p>
+        <p>Category: {{ item.category }}</p>
         <p>Date Reported: {{ item.dateReported }}</p>
         <p>Disposition: {{ item.dateClaimed|default:"Unclaimed" }}</p>
-        <button class="details-btn" data-item-id="{{ item.itemID }}">Details</button>
+        <a href="{% url 'lostfound:itemDetail' item.itemID %}" class="details-btn">Item Details</a>
     </div>
     {% endfor %}
 </div>
