@@ -16,5 +16,5 @@ urlpatterns = [
     path("claim-request/<int:item_id>/", views.claimRequest, name="claimRequest"),
     path("fraud-report/<int:item_id>/", views.fraudReport, name="fraudReport"),
     path("add/", views.add_item, name="add_item"),  # Media
-    #path("add-item/", views.add_item, name="add_item"), #
+
 ]

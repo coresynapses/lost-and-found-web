@@ -57,12 +57,17 @@ class Item(models.Model):
     found = "Found"
     underReview = "Under Review"
     claimed = "Claimed"
+    unclaimed = 'Unclaimed'
 
     STATUS_CHOICES = [
         (lost, "Lost"),
         (found, "Found"),
+    ]
+
+    DISPOSITION_CHOICES = [
         (underReview, "Under Review"),
         (claimed, "Claimed"),
+        (unclaimed, "Unclaimed"),
     ]
 
     itemID = models.AutoField(primary_key=True)
@@ -74,6 +79,7 @@ class Item(models.Model):
     location = models.CharField(max_length=255,blank=True, null=True )
     photo = models.ImageField(upload_to= 'item_photos/', null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=lost)
+    disposition = models.CharField(max_length=20,choices=DISPOSITION_CHOICES,default=unclaimed)
     contactInfo = models.CharField("Contact Information",max_length=255, default="")
     proofOfOwnership = models.TextField("Proof of Ownership",blank=True, null=True)
     claimer = models.ForeignKey(CustomUser, null= True, blank = True, on_delete=models.SET_NULL)
@@ -115,27 +121,23 @@ class claimRequestReport(models.Model):
         if not self.item:
             print("Error, No Item found.")
             return
-        
         print(f"Approving claim for: {self.item.itemName}")
 
         self.status = self.approved
-        self.item.status = Item.claimed
+        self.item.disposition = Item.claimed
         self.item.claimer = self.claimer
         self.item.dateClaimed = timezone.now()
         self.item.save()
-
-        print(f"Item updated to: {self.item.status}")
-
+        print(f"Item updated to: {self.item.disposition}")
 
         self.reviewAdmin = adminUser
         self.dateReviewed = timezone.now()
         self.save()
-
         return f"Claim for '{self.item.itemName}' has been approved and marked as {self.status}."
     
     def rejectClaim(self, adminUser):
         self.status = self.rejected
-        self.item.status = Item.found
+        self.item.disposition = Item.unclaimed
         self.item.save()
         self.reviewAdmin = adminUser
         self.dateReviewed = timezone.now()
@@ -172,7 +174,7 @@ class fraudClaimReport(models.Model):
 
     def resolveFraud(self, adminUser):
         self.status = self.resolved
-        self.item.status = Item.claimed
+        self.item.disposition = Item.claimed
         self.item.save()
         self.reviewAdmin = adminUser
         self.dateReviewed = timezone.now()
@@ -182,7 +184,7 @@ class fraudClaimReport(models.Model):
     
     def rejectFraud(self, adminUser):
         self.status = self.rejected
-        self.item.status = Item.claimed
+        self.item.disposition = Item.claimed
         self.item.save()
         self.reviewAdmin = adminUser
         self.dateReviewed = timezone.now()

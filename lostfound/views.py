@@ -234,11 +234,3 @@ def deleteFraud(request, fraud_id):
     
     return render(request, '', {'fraud': fraud})
 
-#admin related views
-'''
-def approveClaim():
-def rejectClaim():
-def resolveFraud():
-def rejectFraud():
-'''
-

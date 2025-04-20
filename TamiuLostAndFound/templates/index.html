@@ -64,7 +64,8 @@
     <button type="submit">Search</button>
 </form>
 
-<!-- Filters -->
+
+<!-- Filters-->
 <div class="filters">
     <select id="status-filter" class="filter-dropdown">
         <option value="all">All Statuses</option>
@@ -85,6 +86,7 @@
     </select>
 </div>
 
+
 <!-- Image upload -->
 <div class="upload-container">
     <!-- Item Upload Button -->
@@ -94,18 +96,18 @@
 </div>
 
 <!-- Grid-based Item Display -->
-<div class="item-container">
+<div class="item-container" style="height: 400px;">
     {% for item in items %}
-    <div class="Item"
+    <div class="item-card"
          data-status="{{ item.status|lower }}"
          data-category="{{ item.category|lower }}"
          data-disposition="{{ item.dateClaimed|yesno:'claimed,unclaimed' }}">
-        <img src="{{ MEDIA_URL }}{{ item.photo }}" alt="{{ item.itemName }}" width="200">
-        <h3 class="itemName">{{ item.itemName }}</h3>
+        <img src="{{ MEDIA_URL }}{{ item.photo }}" alt="{{ item.itemName }}">
+        <h3 class="item-name">{{ item.itemName }}</h3>
         <p>Status: {{ item.status }}</p>
         <p>Category: {{ item.category }}</p>
         <p>Date Reported: {{ item.dateReported }}</p>
-        <p>Disposition: {{ item.dateClaimed|default:"Unclaimed" }}</p>
+        <p>Disposition: {{ item.disposition }}</p>
         <a href="{% url 'lostfound:itemDetail' item.itemID %}" class="details-btn">Item Details</a>
     </div>
     {% endfor %}
