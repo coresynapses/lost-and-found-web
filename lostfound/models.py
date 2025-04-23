@@ -80,7 +80,7 @@ class Item(models.Model):
     photo = models.ImageField(upload_to= 'item_photos/', null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=lost)
     disposition = models.CharField(max_length=20,choices=DISPOSITION_CHOICES,default=unclaimed)
-    contactInfo = models.CharField("Contact Information",max_length=255, default="")
+    contactInfo = models.CharField("Contact Information (Email)",max_length=255, default="")
     proofOfOwnership = models.TextField("Proof of Ownership",blank=True, null=True)
     claimer = models.ForeignKey(CustomUser, null= True, blank = True, on_delete=models.SET_NULL)
 

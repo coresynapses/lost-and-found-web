@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from . forms import CustomUserCreationForm, CustomUserChangeForm
 from . models import CustomUser, Item, claimRequestReport, fraudClaimReport
-'''
+
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
@@ -18,14 +18,12 @@ class CustomUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {"fields": ("username","first_name","last_name", "email", "password")}),
-        ("Permissions", {"fields": ("is_staff", "is_active", "is_superuser")}),
+        ("Permissions", {"fields": ("is_staff", "is_active", "is_superuser","groups")}),
     )
     
     add_fieldsets = (
         (None, {"fields": ("username","first_name","last_name", "email", "password1", "password2")}),
     )
-'''
-
 
 class itemAdmin(admin.ModelAdmin):
     list_display = [
@@ -120,6 +118,6 @@ class fraudClaimAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Item, itemAdmin)
-#admin.site.register(CustomUser,CustomUserAdmin)
+admin.site.register(CustomUser,CustomUserAdmin)
 admin.site.register(claimRequestReport, claimRequestAdmin)
 admin.site.register(fraudClaimReport, fraudClaimAdmin)
