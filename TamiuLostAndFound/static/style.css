@@ -1,5 +1,5 @@
 header {
-    background-color: #C0C0C0C0; 
+    background-color: #61162d; 
     color: white;
     text-align: center;
     padding: 20px;
@@ -25,14 +25,14 @@ header {
 /* background main page*/
 body {
     font-family: Arial, sans-serif;
-    background-color: #aaa9ad;
+    background-color: white;
     margin: 0;
     padding: 20px;
     text-align: center;
 }
 
 h1 {
-    color: #333;
+    color: white;
     margin-bottom: 20px;
 }
 
@@ -75,12 +75,17 @@ h1 {
 
 
 .nav-buttons {
-    display: flex;
+    
+    justify-content: space-between;  
+    text-align: center;
     border: none;
     padding: 8px 12px;
-    margin-top: 50px;
+    gap: 30px;                   
+    margin-top: 30px;
+    margin-bottom: 30px;
     cursor: pointer;
     border-radius: 5px;
+    
 }
 
 /*log in*/
@@ -93,6 +98,7 @@ h1 {
     cursor: pointer;
     min-height: 32px;
     margin-right: 15px;
+    text-decoration: none;
 }
 
 .btn-primary:hover {
@@ -103,12 +109,14 @@ h1 {
 .btn-success {
     background-color: #28a745;
     color: white;
+    padding: 8px 12px;
     right: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    min-height: 32px;
-    margin-right: 15px;
+   /* min-height: 32px;
+    margin-right: 15px;*/
+    text-decoration: none;
 }
 
 .btn-success:hover {
@@ -172,12 +180,17 @@ h1 {
 }
 
 .btn-secondary {
-    background: gray;
+    background: blue;
     color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: auto;
+    text-decoration: none;
 }
 
 .btn-secondary:hover {
-    background: darkgray;
+    background: darkblue;
 }
 
 #loginSection, #registrationSection {
@@ -342,7 +355,7 @@ h1 {
 }
 
 .item-card {
-    background: #fff;
+    background: #d9d9d9;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -355,8 +368,8 @@ h1 {
 }
 
 .item-card img {
-    height: 250px;
-    width: 265px;
+    width: 100%;    
+    height: 250px;        
     object-fit: cover;
     border-radius: 5px;
 }
@@ -374,15 +387,30 @@ h1 {
 }
 
 .details-btn {
-    background: #007bff;
+    background: #61162d;
     color: white;
     border: none;
     padding: 5px 12px;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.2s;
+    text-decoration: none;
 }
 
 .details-btn:hover {
-    background: #0056b3;
+    background: #61162d;
+}
+
+.btn-info{
+    background: #61162d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: auto;
+    text-decoration: none;
+}
+
+.details-btn:hover {
+    background: #61162d;
 }

@@ -10,18 +10,28 @@
 </head>
 <body>
 
-<h1>Lost and Found</h1>
-
 <header>
-    <nav class="nav-buttons">
-        {% if user.is_authenticated %}
-            <a href="{% url 'lostfound:logout' %}" class="btn btn-danger">Logout</a>
-        {% else %}
-            <a href="/login/" id="loginButton" class="btn btn-primary">Login</a>
-            <a href="/register/" id="registrationButton" class="btn btn-success">Register</a>
-        {% endif %}
-    </nav>
+    <h1>Lost and Found</h1> 
+
 </header>
+
+    <nav class="nav-buttons">
+    {% if user.is_authenticated %}
+        <a href="{% url 'lostfound:logout' %}" class="btn btn-secondary">Logout</a>
+    {% else %}
+        <a href="/login/" id="loginButton" class="btn btn-primary">Login</a>
+        <a href="/register/" id="registrationButton" class="btn btn-success">Register</a>
+    {% endif %}
+
+    </nav>
+
+    <!-- Search Bar -->        
+        <form method="get" class="search-container">
+            <input type="text" name="query" id="search-bar" placeholder="Search item here...">
+            <button type="submit">Search</button>
+        </form>
+
+
 <!--Login Form
 <div class="login-section" id="loginSection">
     <form method="post">
@@ -58,13 +68,6 @@
 </div>
 -->
 
-<!-- Search Bar -->
-<form method="get" class="search-container">
-    <input type="text" name="query" id="search-bar" placeholder="Search item here...">
-    <button type="submit">Search</button>
-</form>
-
-
 <!-- Filters-->
 <div class="filters">
     <select id="status-filter" class="filter-dropdown">
@@ -85,7 +88,6 @@
         <option value="unclaimed">Unclaimed</option>
     </select>
 </div>
-
 
 <!-- Image upload -->
 <div class="upload-container">
