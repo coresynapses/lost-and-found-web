@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,22 +14,23 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: #F5F5DC;
+            background: #a5a5a5;
             
         }
         header, footer {
-            background: #0B1957;
+            background: #61162d;
             width: 100%;
             text-align: center;
             padding: 20px;
         }
         nav {
-            background: #426BC2;
+            background: #dddddd;
             width: 100%;
             display: flex;
             justify-content: center;
             gap: 15px;
             padding: 15px;
+            text-decoration: none;
         }
         main {
             display: flex;
@@ -37,14 +40,14 @@
         }
         article {
             flex: 2;
-            background: #E8D9ED;
+            background: #61162d;
             padding: 15px;
             
         }
         section {
             display:flex;
             flex-direction:column;
-            background: #D2B3DB;
+            background: #dddddd;
             margin: 10px;
             padding: 10px;
             
@@ -54,15 +57,16 @@
 </head>
 <body>
     <header>
-        <h1><font color="white">Welcome to Lost and Found!</font></h1>
+        <h1><font color="white">Welcome to Lost and Found!!</font></h1>
 
     </header>
 
     <nav>
-        <a href="#">Home</a>
-        <a href="#">Report Lost or Found Item</a>
-        <a href="#">Make a claim</a>
-        <a href="#">Login</a>
+        <a href="{% url 'lostfound:itemList' %}">Home</a>
+        <a href="{% url 'lostfound:add_item' %}">Report Lost or Found Item</a>
+        <a href="{% url 'lostfound:login' %}">Login</a>
+        
+
     </nav>
 
     <h3>Every day, many items are lost and found. Our website allows provides an efficient platform through a grid based 

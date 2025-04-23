@@ -1,13 +1,38 @@
+header {
+    background-color: #61162d; 
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header-banner {
+    background-color: #800000;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.header-banner p {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* background main page*/
 body {
     font-family: Arial, sans-serif;
-    background-color: #aaa9ad;
+    background-color: white;
     margin: 0;
     padding: 20px;
     text-align: center;
 }
 
 h1 {
-    color: #333;
+    color: white;
     margin-bottom: 20px;
 }
 
@@ -31,30 +56,50 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* login and register button style */
-.btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
+/*report button*/
+
+.report-btn {
+    background-color: red;
     color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 50px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    position: absolute; 
-    top: 10px; 
-    right: 10px; 
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.report-btn:hover {
+    background-color: darkred;
+}
+
+
+.nav-buttons {
+    
+    justify-content: space-between;  
+    text-align: center;
+    border: none;
+    padding: 8px 12px;
+    gap: 30px;                   
+    margin-top: 30px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    border-radius: 5px;
+    
 }
 
 /*log in*/
 .btn-primary {
     background-color: #007bff;
+    color: white;
+    right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    min-height: 32px;
+    margin-right: 15px;
+    text-decoration: none;
 }
-.btn-primary {
-    right: 120px; /* log in slightly left */
-}
-
-
 
 .btn-primary:hover {
     background-color: #0056b3;
@@ -63,14 +108,22 @@ h1 {
 /*register button*/
 .btn-success {
     background-color: #28a745;
+    color: white;
+    padding: 8px 12px;
+    right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+   /* min-height: 32px;
+    margin-right: 15px;*/
+    text-decoration: none;
 }
 
-.btn-success {
-    right: 10px; /*register button far right style*/
-}
 .btn-success:hover {
     background-color: #218838;
 }
+
+/* log in form*/
 
 .login-section {
     display: none;
@@ -118,6 +171,8 @@ h1 {
 .btn-primary {
     background: blue;
     color: white;
+    padding: 10px 20px;
+    width: auto;
 }
 
 .btn-primary:hover {
@@ -125,60 +180,93 @@ h1 {
 }
 
 .btn-secondary {
-    background: gray;
+    background: blue;
     color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: auto;
+    text-decoration: none;
 }
 
 .btn-secondary:hover {
-    background: darkgray;
+    background: darkblue;
 }
 
-/*report page */
-#reportSection {
+#loginSection, #registrationSection {
+    display: none;
+}
+
+
+/* Report Form */
+.report-container {
+    background: white;
+    width: 60%;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 800px;
-}
-
-#reportSection h2 {
-    color: #333;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .report-container h2 {
     margin-bottom: 15px;
-    font-size: 24px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table th, table td {
-    border: 1px solid #ccc;
-    padding: 10px;
+    text-align: center;
+  }
+  
+  .form-row {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: 10px;
+  }
+  
+  .form-row label {
+    width: 30%; 
     text-align: left;
-}
-
-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-table tr:hover {
-    background-color: #eaeaea;
-}
-
-
+    padding-top: 5px; 
+  }
+  
+  .form-row input, .form-row textarea, .form-row select {
+    width: 70%; 
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .form-row textarea {
+    height: 80px; 
+  }
+  
+  .form-row input[type="file"] {
+    padding: 5px;
+  }
+  
+  .report-container .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px; 
+  }
+  
+  /* Style the buttons inside the button-container */
+  .report-container .button-container button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px; 
+  }
+  
+  
+  .report-container .report-btn-primary {
+    background-color: #ff0000;
+    color: white;
+  }
+  
+  .report-container .report-btn-secondary {
+    background-color: gray;
+    color: white;
+  }
 /* registration page */
-
-
 
 .registration-section {
     width: 400px; 
@@ -230,8 +318,8 @@ table tr:hover {
 
 .registration-section form button:hover {
     background-color: #0056b3; 
+    width: 20;
 }
-
 
 /*image upload */
 .upload-container {
@@ -267,7 +355,7 @@ table tr:hover {
 }
 
 .item-card {
-    background: #fff;
+    background: #d9d9d9;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -280,8 +368,8 @@ table tr:hover {
 }
 
 .item-card img {
+    height: 250px;
     width: 100%;
-    height: 150px;
     object-fit: cover;
     border-radius: 5px;
 }
@@ -299,15 +387,30 @@ table tr:hover {
 }
 
 .details-btn {
-    background: #007bff;
+    background: #61162d;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 5px 12px;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.2s;
+    text-decoration: none;
 }
 
 .details-btn:hover {
-    background: #0056b3;
+    background: #61162d;
+}
+
+.btn-info{
+    background: #61162d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: auto;
+    text-decoration: none;
+}
+
+.details-btn:hover {
+    background: #61162d;
 }

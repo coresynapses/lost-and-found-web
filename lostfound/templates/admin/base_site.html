@@ -1,0 +1,47 @@
+{% extends "admin/base.html" %}
+
+{% block title %} Lost & Found Staff {% endblock %}
+
+{% block branding %}
+  <h1 id="site-name"><a href="{% url 'admin:index' %}">Lost & Found Admin</a></h1>
+{% endblock %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <style>
+    #header {
+        background-color: #61162d;
+        color: white !important;
+    }
+
+    .module caption {
+        background-color: #61162d !important;
+        color: white !important;
+
+    }
+    div.breadcrumbs{
+        background-color: #61162d !important;
+        color: white !important;
+    }
+    #site-name a {
+        color: white !important;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .module h2 {
+        color: white !important;
+    }
+
+    .module h2, .filter-title {
+    background-color: #61162d !important;
+    color: white !important;
+    padding: 6px;
+    border-radius: 4px;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+  </style>
+{% endblock %}

@@ -15,12 +15,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 #User password change
 class CustomUserChangeForm(UserChangeForm):
-    password = forms.CharField(
-        widget= forms.PasswordInput(attrs={'placeholder': 'Enter new password.'}),
-        required = False,
-        help_text= "Leave blank if you don't want to change the password."
-    )
-    
+       
     class Meta:
         model = CustomUser
         fields = ("username","email","first_name","last_name","password")
@@ -28,7 +23,9 @@ class CustomUserChangeForm(UserChangeForm):
             'email': forms.EmailInput(attrs={'placeholder': "Enter email"}),
             'first_name': forms.TextInput(attrs={'placeholder': "First Name"}),
             'last_name' : forms.TextInput(attrs={'placeholder': 'Last Name'}),
+            'password' : forms.PasswordInput(attrs={'placeholder': ""})
         }
+    
 
 #item creation
 class ItemForm(forms.ModelForm):

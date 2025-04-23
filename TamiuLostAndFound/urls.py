@@ -21,9 +21,9 @@ from django.conf.urls.static import static
 
 from LostAndFoundAndroid import views
 
+
 urlpatterns = [
-    path("", include("authentication.urls")),
-    path("home/", include("lostfound.urls")),
+    path("", include("lostfound.urls", namespace="lostfound")),
     path('admin/', admin.site.urls),
     path("android/", views.android, name="android")
 ]

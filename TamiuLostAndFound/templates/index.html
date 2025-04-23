@@ -6,23 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lost and Found</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    
 </head>
 <body>
 
-<h1>Lost and Found</h1>
-
 <header>
-    <nav class="nav-buttons">
-        {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
-        {% else %}
-            <a href="#" id="loginButton" class="btn btn-primary">Login</a>
-            <a href="#" id="registrationButton" class="btn btn-success">Register</a>
-        {% endif %}
-    </nav>
+    <h1>Lost and Found</h1> 
+
 </header>
 
-<!-- Login Form -->
+    <nav class="nav-buttons">
+    {% if user.is_authenticated %}
+        <a href="{% url 'lostfound:logout' %}" class="btn btn-secondary">Logout</a>
+    {% else %}
+        <a href="/login/" id="loginButton" class="btn btn-primary">Login</a>
+        <a href="/register/" id="registrationButton" class="btn btn-success">Register</a>
+    {% endif %}
+
+    </nav>
+
+    <!-- Search Bar -->        
+        <form method="get" class="search-container">
+            <input type="text" name="query" id="search-bar" placeholder="Search item here...">
+            <button type="submit">Search</button>
+        </form>
+
+
+<!--Login Form
 <div class="login-section" id="loginSection">
     <form method="post">
         {% csrf_token %}
@@ -35,11 +45,13 @@
         <button type="submit" class="btn-primary">Login</button>
     </form>
 
-    <!-- Return to Main menu Button -->
+    Return to Main menu Button
     <button id="returnToMain" class="btn-secondary">Return to Main Page</button>
 </div>
+-->
 
-<!-- Registration Form Section -->
+
+<!-- Registration Form Section
 <div class="registration-section full-page" id="registrationSection" style="display: none;">
     <form method="post">
         {% csrf_token %}
@@ -54,13 +66,9 @@
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>
+-->
 
-<!-- Search Bar -->
-<div class="search-container">
-    <input type="text" id="search-bar" placeholder="Search item here...">
-</div>
-
-<!-- Filters -->
+<!-- Filters-->
 <div class="filters">
     <select id="status-filter" class="filter-dropdown">
         <option value="all">All Statuses</option>
@@ -83,29 +91,26 @@
 
 <!-- Image upload -->
 <div class="upload-container">
-    <input type="file" id="upload-image" accept="image/*">
-    <button id="upload-btn" class="details-btn">Upload Image</button>
-
     <!-- Item Upload Button -->
-    <a href="{% url 'lostfound:add_item' %}" class="btn btn-info">Add Item</a>
+    <a href="{% url 'lostfound:add_item' %}" class="details-btn">Report Item</a>
 
     <div id="preview-container"></div>
 </div>
 
 <!-- Grid-based Item Display -->
-<div class="item-container">
+<div class="item-container" style="height: 400px;">
     {% for item in items %}
-    <div class="Item"
+    <div class="item-card"
          data-status="{{ item.status|lower }}"
-         data-category="{{ item.category__categoryName|lower }}"
+         data-category="{{ item.category|lower }}"
          data-disposition="{{ item.dateClaimed|yesno:'claimed,unclaimed' }}">
-        <img src="{{ MEDIA_URL }}{{ item.photo }}" alt="{{ item.itemName }}" width="200">
-        <h3 class="itemName">{{ item.itemName }}</h3>
+        <img src="{{ MEDIA_URL }}{{ item.photo }}" alt="{{ item.itemName }}">
+        <h3 class="item-name">{{ item.itemName }}</h3>
         <p>Status: {{ item.status }}</p>
-        <p>Category: {{ item.category__categoryName }}</p>
+        <p>Category: {{ item.category }}</p>
         <p>Date Reported: {{ item.dateReported }}</p>
-        <p>Disposition: {{ item.dateClaimed|default:"Unclaimed" }}</p>
-        <button class="details-btn" data-item-id="{{ item.itemID }}">Details</button>
+        <p>Disposition: {{ item.disposition }}</p>
+        <a href="{% url 'lostfound:itemDetail' item.itemID %}" class="details-btn">Item Details</a>
     </div>
     {% endfor %}
 </div>
