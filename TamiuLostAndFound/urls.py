@@ -31,7 +31,10 @@ urlpatterns = [
     path("fraud-report/", include("lostfound.urls")),
     path('homepage/',include("lostfound.urls")),
     path('admin/', admin.site.urls),
-    path("android/", views.android, name="android")
+    path("android/", views.android, name="android"),
+    path("android-upload/", views.androidUpload, name="android-upload"),
+    path("android-claim/",  views.androidClaim,  name="android-claim"),
+    path("android-report/", views.androidReport, name="android-report"),
 ]
 
 #url patterns for media files

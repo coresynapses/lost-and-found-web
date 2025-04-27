@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-uli+r_12g80w^=lq%82rylcxisiig!lzfkc(cr(ke62@3vldan
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # "locahost", # Whitelist the localhost. For development purpose only. Delete later.
-    "10.0.2.2", # Whitelist the Android Emulator. For development purpose only. Delete later.
+    "localhost", # Whitelist the localhost. For development purpose only. Delete later.
+    "10.0.2.2",  # Whitelist the Android Emulator. For development purpose only. Delete later.
 ]
 
 
