@@ -37,25 +37,29 @@ To verify that Django works, run the server:
 python manage.py runserver 8080
 ```
 
-If you have issues related to the database or migrations, run the
-following code:
-
-```
-python manage.py migrate
-```
-
 Visit http://localhost:8080 to check that the website works.
 
-## For Frontend work
+## To Work With This Repo (Both Frontend and Backend)
 
-Before you start working with the code base, you need to switch to the
-"frontend" git branch, start the Python virtual environment, and run
-the server.
+DO NOT DELETE THE `.gitignore` FILE!
+
+`.gitignore` blacklists everything by default and only whitelists the
+necessary files.
+
+AVOID MODIFYING THE `.gitignore` FILE!
+
+You should only whitelist a directory or a file if it's critical to
+the project. This will prevent a lot of issues with git merges, file
+pollution, and incompatible database migrations in the future.
+
+------
+
+Before you start working with the code base, you need to start the
+Python virtual environment, set up the database, and run the server.
 
 You do this by executing the following in the project root directory:
 
 ```
-git checkout frontend
 .\.env\Scripts\Activate.ps1
 python manage.py runserver 8080
 ```
@@ -64,31 +68,4 @@ Most of the frontend work will be done in the following folders:
 - TamiuLostAndFound/templates - contains HTML files
 - TamiuLostAndFound/static - contains CSS and JS files
 
-Since we are using Django, frontend developers should be familiar with
-Django templates.
 
-More information is here:
-https://docs.djangoproject.com/en/5.1/topics/templates/
-
-## For Backend work
-
-Before you start working with the code base, you need to switch to the
-"backend" git branch and start the Python virtual environment.
-
-You do this by executing the following in the project root directory:
-
-```
-git checkout backend
-.\.env\Scripts\Activate.ps1
-```
-
-You don't need to run the server as the changes you make will change
-the way the server behaves.
-
-Most of the backend work will be done in the Python files found in the
-TamiuLostAndFound folder.
-
-Avoid modifying the following files:
-- manage.py
-- db.sqlite3
-- TamiuLostAndFound/settings.py

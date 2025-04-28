@@ -6,12 +6,18 @@
 # Text-based documents
 !*.md
 !*.txt
+!*.csv
 
 # Code
 !*.py
 !*.html
 !*.css
 !*.js
+
+# Scripts
+!*.sh
+!*.ps1
+!*.bat
 
 # Images
 !*.jpeg
@@ -34,3 +40,7 @@
 
 !media/
 !media/item_photos
+
+!scripts/
+
+!data/
