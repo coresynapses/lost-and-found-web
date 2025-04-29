@@ -1,11 +1,11 @@
 ID, Name, Description, Category Foreign key, Date Reported, Date Claimed, Location, Photo, Status, Disposition, Contact Info, Proof of Ownership, Claimer Foreign Key
-1,Black shirt,It's just a black shirt,1,2025-05-10,2025-08-09,AIC,,found,under review,(123)-456-6798,License,3
-2,Black Pants,It's just a pair of black pants,1,2025-06-11,2025-09-08,LBV,,lost,claimed,(456)-123-6798,Passport,4
-3,Gold Watch,Pretty cool watch,5,2025-07-01,,Library,,lost,unclaimed,,,
-4,Credit Card,Infinite money glitch,2,2025-05-10,2025-08-09,AIC,,found,under review,(123)-456-6798,Password,5
-5,Some Weird Thing,It's pretty weird ,1,2025-06-11,2025-09-08,LBV,,lost,claimed,(451)-798-6236,Title,1
-6,Lebron James,What's he doing here?,4,2025-07-01,,Library,,lost,unclaimed,,,
-7,Airplane,How do you lose an airplane?,3,2025-05-10,2025-08-09,AIC,,found,under review,(456)-123-6798,Passport,4
-8,Lego set,An incomplete minecraft lego set,3,2025-06-11,2025-09-08,LBV,,lost,claimed,(679)-456-8123,School ID,2
-9,Water Bottle,Thermos water bottle,1,2025-07-01,,Library,,lost,unclaimed,,,
-10,Chair,Someone's chair,6,2025-05-10,2025-08-09,AIC,,lost,under review,(451)-798-6236,Title,1
+1,Black shirt,It's just a black shirt,1,2025-05-10,2025-08-09,AIC,black-shirt.jpg,found,under review,(123)-456-6798,License,3
+2,Black Pants,It's just a pair of black pants,1,2025-06-11,2025-09-08,LBV,black-pants.jpg,lost,claimed,(456)-123-6798,Passport,4
+3,Gold Watch,Pretty cool watch,5,2025-07-01,,Library,gold-watch.jpg,lost,unclaimed,,,
+4,Credit Card,Infinite money glitch,2,2025-05-10,2025-08-09,AIC,credit-card.jpg,found,under review,(123)-456-6798,Password,5
+5,Some Weird Thing,It's pretty weird ,1,2025-06-11,2025-09-08,LBV,some-weird-thing.jpg,lost,claimed,(451)-798-6236,Title,1
+6,Lebron James,What's he doing here?,4,2025-07-01,,Library,lebron.png,lost,unclaimed,,,
+7,Airplane,How do you lose an airplane?,3,2025-05-10,2025-08-09,AIC,airplane,found,under review,(456)-123-6798,Passport,4
+8,Lego set,An incomplete minecraft lego set,3,2025-06-11,2025-09-08,LBV,lego-set.jpg,lost,claimed,(679)-456-8123,School ID,2
+9,Water Bottle,Thermos water bottle,1,2025-07-01,,Library,water-bottle.jpg,lost,unclaimed,,,
+10,Chair,Someone's chair,6,2025-05-10,2025-08-09,AIC,chair.jpg,lost,under review,(451)-798-6236,Title,1
