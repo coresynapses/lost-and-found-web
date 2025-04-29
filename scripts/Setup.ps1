@@ -1,7 +1,3 @@
-Write-Host "Args Count: $($args.Count)";
-Write-Host "Args Count is zero: $($args.Count -eq 0)";
-Write-Host "Args Count is zero: $($args[0] -eq "init")";
-
 if ($args.Count -eq 0) {
 	Write-Host "Initialize";
 	python manage.py makemigrations lostfound
