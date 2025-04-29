@@ -414,3 +414,13 @@ h1 {
 .details-btn:hover {
     background: #61162d;
 }
+
+/* claim display*/
+
+#claim-proof-form {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}

@@ -1,11 +1,15 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval';">
   <title>Lost and Found</title>
   <style>
+    
     body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -158,7 +162,7 @@
     <div class="container">
       <img src="{{ item.photo.url }}" alt="{{ item.itemName }}" class="item-image">
       <div class="content">
-        <div id="item-detail" class="card">
+        <div class="card">
         <h2>{{item.itemName}}</h2>
         <p>Description: {{item.description}}</p>
         <p>Status:{{item.status}}</p>
@@ -166,15 +170,44 @@
         <p>Date Reported: {{ item.dateReported }}</p>
         <p>Date Claimed: {{ item.dateClaimed|default:"Not claimed yet" }}</p>
         <p>Contact Information: {{item.contactInfo}}</p>
-        <button class="claim-btn" onclick="claimItem()">Claim Item</button>
+        <button class="claim-btn" id="claim-item-btn">Claim Item</button>
+       
+        <!-- Claim form (hidden initially) -->
+      <div id="claim-proof-form" class="claim-proof" style="display: none;">
+        <form method="POST">
+         {% csrf_token %}
+       <label for="proof">Explanation/proof of ownership:</label>
+        <textarea id="proof" name="proof" required></textarea>
+       <button type="submit" class="claim-btn">Submit Claim</button>
+        </form>
+              </div>
+              <!-- Hidden Report Fraud button -->
+<button id="report-fraud-btn" style="display: none; background-color: red; color: white; padding: 10px; border: none; border-radius: 5px; margin-top: 10px;">
+    Report Fraud
+</button>
+<!-- Hidden Report Fraud Form -->
+<div id="report-fraud-form" class="claim-proof" style="display: none;">
+  <form id="fraudForm" method="POST">
+    {% csrf_token %}
+    <label for="fraud-report">Explain suspected fraud/Proof of ownership:</label>
+    <textarea id="fraud-report" name="fraud-report" required></textarea>
+    <button type="submit" class="claim-btn" style="background-color: red;">Submit Report</button>
+  </form>
+</div>
+<!-- Thank You Message (hidden initially) -->
+<div id="fraud-thank-you" style="display: none; margin-top: 20px; color: green; font-weight: bold;">
+  Thank you for your fraud report! We will review it shortly.
+</div>
         </div>
         <div class="navigation">
-          <button id="prev-btn" onclick="prevItem()">← Previous</button>
-          <button id="next-btn" onclick="nextItem()">Next →</button>
+            <button id="prev-btn">← Previous</button>
+            <button id="next-btn">Next →</button>
+          </div>
         </div>
       </div>
     </div>
   </main>
 
+  <script src="{% static 'dynamic.js' %}"></script>
 </body>
 </html>
