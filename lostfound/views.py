@@ -6,7 +6,8 @@ from django.urls import reverse
 from django.core.exceptions import PermissionDenied
 from django.conf import settings
 
-from .models import CustomUser, Item, claimRequestReport, fraudClaimReport  # Ensure all models are imported
+# Ensure all models are imported
+from .models import CustomUser, Item, claimRequestReport, fraudClaimReport
 from .forms import CustomUserCreationForm, ItemForm, claimForm, fraudForm
 
 #authentication & homepage
@@ -54,8 +55,8 @@ def logout_user(request):
 
 
 
-#item CRUD
-#lists all items and filters through item name, or description
+# Items CRUD:
+# - Lists all items and filters through item name, or description
 def itemList(request):
     query = request.GET.get('query')
     if query:
@@ -69,16 +70,17 @@ def itemList(request):
         'query': query,
     })
 
-#provides details on one item, and can claim or report fraud on item.
-def itemDetail(request, item_id): 
+# provides details on one item, and can claim or report fraud on item.
+def itemDetail(request, item_id):
     item = get_object_or_404(Item, itemID = item_id)
 
     return render(request, 'item_detail.html', {
         'item' : item,
     })
 
-#item creation, only members can create a report, 
-#if they are not logged in it will redirect them to the login page
+# - Create item, only members can create a report, 
+#   If they are not logged in, it will redirect them to the login
+#   page.
 @login_required(login_url='lostfound:login')
 def add_item(request):
     if request.method == 'POST':
@@ -90,7 +92,7 @@ def add_item(request):
         form = ItemForm()
     return render(request, 'add_item.html', {'form': form})
 
-# edit item
+# - Edit Item
 @login_required(login_url='lostfound:login')
 def editItem(request, item_id):
     item = get_object_or_404(Item, itemID = item_id)
@@ -105,7 +107,7 @@ def editItem(request, item_id):
     
     return render(request, '', {'form': form, 'item': item})#needs HTML
 
-#item deletion
+# - Delete Item
 @login_required(login_url='lostfound:login')
 def deleteItem(request, item_id):
     item = get_object_or_404(Item, itemID = item_id)
@@ -122,8 +124,8 @@ def deleteItem(request, item_id):
 
 
 
-#Claims CRUD
-#claims creation
+# Claims CRUD:
+# - Claims creation
 @login_required(login_url='lostfound:login')
 def claimRequest(request, item_id):
     item = get_object_or_404(Item, itemID=item_id)
@@ -141,7 +143,7 @@ def claimRequest(request, item_id):
 
     return render(request,'' ,{'form': form, 'item': item}) #needs HTML
 
-#edit claim
+# - Edit claim
 @login_required(login_url='lostfound:login')
 def editClaim(request, claim_id):
     claim = get_object_or_404(claimRequestReport, id = claim_id)
@@ -159,7 +161,7 @@ def editClaim(request, claim_id):
 
     return render(request, '', {'form': form, 'claim' : claim}) #needs HTML
 
-#delete claim
+# - Delete claim
 @login_required(login_url='lostfound:login')
 def deleteClaim(request, claim_id):
     claim = get_object_or_404(claimRequestReport, id = claim_id)
@@ -179,8 +181,8 @@ def deleteClaim(request, claim_id):
 
 
 
-#Fraud CRUD
-#fraud creation
+# Fraud CRUD:
+# - Fraud creation
 @login_required(login_url='lostfound:login')
 def fraudReport(request, item_id):
     item = get_object_or_404(Item, id=item_id)
@@ -198,7 +200,7 @@ def fraudReport(request, item_id):
     
     return render(request,'',{'form':form, 'item': item}) #needs HTML
 
-#edit fraud claim
+# - Edit fraud claim
 @login_required(login_url='lostfound:login')
 def editFraud(request, fraud_id):
     fraud = get_object_or_404(fraudClaimReport, id = fraud_id)
@@ -217,7 +219,7 @@ def editFraud(request, fraud_id):
 
     return render(request, '', {'form': form, 'fraud': fraud})
 
-#delete fraud claim
+# - Delete fraud claim
 @login_required(login_url='lostfound:login')
 def deleteFraud(request, fraud_id):
     fraud = get_object_or_404(fraudClaimReport, id = fraud_id)

@@ -1,0 +1,6 @@
+ID,Item Foreign Key,Claimer Foreign Key,Contact Info,Proof of Ownership,Status,Review Admin,Date Submitted,Date Reviewed
+1,1,3,(123)-456-6798,License,Pending,,,
+2,2,4,(456)-123-6798,Passport,Approved,,,
+3,3,2,(679)-456-8123,School ID,Rejected,,,
+4,4,5,(123)-456-6798,Password,Pending,,,
+5,5,1,(451)-798-6236,Title,Approved,,,

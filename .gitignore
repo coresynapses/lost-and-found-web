@@ -32,6 +32,8 @@
 
 !lostfound
 !lostfound/templates
+!lostfound/management/
+!lostfound/management/commands/
 
 !LostAndFoundAndroid
 

@@ -47,6 +47,7 @@ class CustomUser(AbstractUser):
         return f"Found item '{foundItem.itemName}' reported successfully."
 
 class Category(models.Model):
+    categoryID   = models.AutoField(primary_key=True)
     categoryName = models.CharField(max_length=255)
 
     def __str__(self):
@@ -70,19 +71,19 @@ class Item(models.Model):
         (unclaimed, "Unclaimed"),
     ]
 
-    itemID = models.AutoField(primary_key=True)
-    itemName = models.CharField("Item Name", max_length=255, default="")
-    description = models.TextField(blank=True, null=True, default="")
-    category = models.ForeignKey(Category, null= True, default=1,on_delete=models.CASCADE)
-    dateReported = models.DateTimeField("Date Reported", auto_now_add=True)
-    dateClaimed = models.DateTimeField("Date Claimed", null= True, blank=True)
-    location = models.CharField(max_length=255,blank=True, null=True )
-    photo = models.ImageField(upload_to= 'item_photos/', null=True, blank=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=lost)
-    disposition = models.CharField(max_length=20,choices=DISPOSITION_CHOICES,default=unclaimed)
-    contactInfo = models.CharField("Contact Information (Email)",max_length=255, default="")
-    proofOfOwnership = models.TextField("Proof of Ownership",blank=True, null=True)
-    claimer = models.ForeignKey(CustomUser, null= True, blank = True, on_delete=models.SET_NULL)
+    itemID           = models.AutoField    (primary_key=True)
+    itemName         = models.CharField    ("Item Name", max_length=255, default="")
+    description      = models.TextField    (blank=True, null=True, default="")
+    category         = models.ForeignKey   (Category, null= True, default=1,on_delete=models.CASCADE)
+    dateReported     = models.DateTimeField("Date Reported", auto_now_add=True)
+    dateClaimed      = models.DateTimeField("Date Claimed", null= True, blank=True)
+    location         = models.CharField    (max_length=255,blank=True, null=True )
+    photo            = models.ImageField   (upload_to= 'item_photos/', null=True, blank=True)
+    status           = models.CharField    (max_length=20, choices=STATUS_CHOICES, default=lost)
+    disposition      = models.CharField    (max_length=20,choices=DISPOSITION_CHOICES,default=unclaimed)
+    contactInfo      = models.CharField    ("Contact Information (Email)",max_length=255, default="")
+    proofOfOwnership = models.TextField    ("Proof of Ownership",blank=True, null=True)
+    claimer          = models.ForeignKey   (CustomUser, null= True, blank = True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = "Item"
@@ -90,7 +91,6 @@ class Item(models.Model):
 
     def __str__(self):
         return f"{self.itemName} ({self.get_status_display()})"
-    
 
 class claimRequestReport(models.Model):
     pending = "Pending"
@@ -103,15 +103,15 @@ class claimRequestReport(models.Model):
         (rejected, "Rejected"),
     ]
 
-    claimID = models.AutoField(primary_key=True)
-    item = models.OneToOneField(Item, on_delete=models.CASCADE)
-    claimer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="claimUser")
-    contactInfo = models.CharField("Contact Information",max_length=255, default="")
-    proofOfOwnership = models.TextField("Proof of Ownership",default="")
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=pending)
-    reviewAdmin = models.ForeignKey(CustomUser, null= True, blank= True, on_delete=models.SET_NULL, related_name="claimAdminUser")
-    dateSubmitted = models.DateTimeField("Date Submitted",auto_now_add=True)
-    dateReviewed = models.DateTimeField("Date Reviewed", null= True, blank=True)
+    claimID          = models.AutoField    (primary_key=True)
+    item             = models.OneToOneField(Item, on_delete=models.CASCADE)
+    claimer          = models.ForeignKey   (CustomUser, on_delete=models.CASCADE, related_name="claimUser")
+    contactInfo      = models.CharField    ("Contact Information",max_length=255, default="")
+    proofOfOwnership = models.TextField    ("Proof of Ownership",default="")
+    status           = models.CharField    (max_length=20, choices=STATUS_CHOICES, default=pending)
+    reviewAdmin      = models.ForeignKey   (CustomUser, null= True, blank= True, on_delete=models.SET_NULL, related_name="claimAdminUser")
+    dateSubmitted    = models.DateTimeField("Date Submitted",auto_now_add=True)
+    dateReviewed     = models.DateTimeField("Date Reviewed", null= True, blank=True)
 
     class Meta:
         verbose_name = "Claim Request"

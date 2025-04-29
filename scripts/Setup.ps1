@@ -1,0 +1,27 @@
+Write-Host "Args Count: $($args.Count)";
+Write-Host "Args Count is zero: $($args.Count -eq 0)";
+Write-Host "Args Count is zero: $($args[0] -eq "init")";
+
+if ($args.Count -eq 0) {
+	Write-Host "Initialize";
+	python manage.py makemigrations lostfound
+	python manage.py migrate
+	python manage.py database --mode 0
+} else {
+    switch ($arg[0]) {
+	"init" {
+	    Write-Host "Initialize";
+	    python manage.py makemigrations lostfound
+	    python manage.py migrate
+	    python manage.py database --mode 0
+	}
+	"clear" {
+	    Write-Host "Clearing database";
+	    python manage.py database --mode 3
+	}
+	"show" {
+	    Write-Host "Displaying database";
+	    python manage.py database --mode 2
+	}
+    }
+}

@@ -39,33 +39,50 @@ python manage.py runserver 8080
 
 Visit http://localhost:8080 to check that the website works.
 
-## To Work With This Repo (Both Frontend and Backend)
+## A Note about `.gitignore`
 
-DO NOT DELETE THE `.gitignore` FILE!
+### DO NOT DELETE THE `.gitignore` FILE!
 
 `.gitignore` blacklists everything by default and only whitelists the
 necessary files.
 
-AVOID MODIFYING THE `.gitignore` FILE!
+### AVOID MODIFYING THE `.gitignore` FILE!
 
 You should only whitelist a directory or a file if it's critical to
 the project. This will prevent a lot of issues with git merges, file
 pollution, and incompatible database migrations in the future.
 
-------
+## To Work With This Repo (Both Frontend and Backend)
 
-Before you start working with the code base, you need to start the
-Python virtual environment, set up the database, and run the server.
+Before you start working with the code base, you need to 
+- start the Python virtual environment, 
+- set up the database, and 
+- run the server.
+
+### Start the Python Virtual Environment
 
 You do this by executing the following in the project root directory:
 
 ```
 .\.env\Scripts\Activate.ps1
+```
+
+### Setup the database
+
+You do this by executing the following in the project root directory:
+
+```
+.\scripts\Setup.ps1
+```
+
+### Run the server
+
+You do this by executing the following in the project root directory:
+
+```
 python manage.py runserver 8080
 ```
 
-Most of the frontend work will be done in the following folders:
-- TamiuLostAndFound/templates - contains HTML files
-- TamiuLostAndFound/static - contains CSS and JS files
+### Load the website
 
-
+Go to http://localhost:8080.

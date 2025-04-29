@@ -27,11 +27,11 @@ class CustomUserChangeForm(UserChangeForm):
         }
     
 
-#item creation
+# Item Creation:
 class ItemForm(forms.ModelForm):
     class Meta:
-            model = Item
-            fields = ['itemName', 'description', 'category', 'location', 'photo', 'status', 'contactInfo']
+        model = Item
+        fields = ['itemName', 'description', 'category', 'location', 'photo', 'status', 'contactInfo']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
