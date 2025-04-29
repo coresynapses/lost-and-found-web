@@ -19,7 +19,7 @@ directory:
 mkdir .env
 python -m venv .env
 .\.env\Scripts\Activate.ps1
-python install -r .\requirements.txt
+pip install -r .\requirements.txt
 
 ```
 
@@ -28,7 +28,7 @@ python install -r .\requirements.txt
 mkdir .env
 python -m venv .env
 source .\.env\Scripts\activate
-python install -r .\requirements.txt
+pip install -r .\requirements.txt
 ```
 
 To verify that Django works, run the server:
@@ -68,6 +68,10 @@ You do this by executing the following in the project root directory:
 ```
 
 ### Setup the database
+
+Before executing this command, delete:
+- `db.sqlite3`
+- any `migrations` directories that are 
 
 You do this by executing the following in the project root directory:
 

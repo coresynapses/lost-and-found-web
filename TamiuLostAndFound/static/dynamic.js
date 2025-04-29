@@ -136,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // CLAIM ITEM BUTTON 
     if (claimButton && claimForm) {
         console.log('Claim button and form found!');
+	
         claimButton.addEventListener('click', function () {
             console.log('Claim button clicked!');
             if (claimForm.style.display === 'none' || claimForm.style.display === '') {
@@ -144,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 claimForm.style.display = 'none';
             }
         });
+
     } else {
         console.log('Claim button or claim form not found!');
     }
@@ -200,28 +202,29 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 5000);
         });
     }
+
     // Get the current item ID from the URL
-const currentUrl = window.location.href;
-const itemIdMatch = currentUrl.match(/\/item-list\/(\d+)/);
-
-if (itemIdMatch) {
-    let currentItemId = parseInt(itemIdMatch[1]); // Extract current item ID as number
-
-    if (prevButton) {
-        prevButton.addEventListener('click', function() {
-            if (currentItemId > 1) { // Optional: Only go back if > 1
-                const prevItemId = currentItemId - 1;
-                window.location.href = `/item-list/${prevItemId}/`;
-            }
-            // Optional: if at 1, loop to last item? (Advanced)
-        });
+    const currentUrl = window.location.href;
+    const itemIdMatch = currentUrl.match(/\/item-list\/(\d+)/);
+    
+    if (itemIdMatch) {
+	let currentItemId = parseInt(itemIdMatch[1]); // Extract current item ID as number
+	
+	if (prevButton) {
+            prevButton.addEventListener('click', function() {
+		if (currentItemId > 1) { // Optional: Only go back if > 1
+                    const prevItemId = currentItemId - 1;
+                    window.location.href = `/item-list/${prevItemId}/`;
+		}
+		// Optional: if at 1, loop to last item? (Advanced)
+            });
+	}
+	
+	if (nextButton) {
+            nextButton.addEventListener('click', function() {
+		const nextItemId = currentItemId + 1;
+		window.location.href = `/item-list/${nextItemId}/`;
+            });
+	}
     }
-
-    if (nextButton) {
-        nextButton.addEventListener('click', function() {
-            const nextItemId = currentItemId + 1;
-            window.location.href = `/item-list/${nextItemId}/`;
-        });
-    }
-}
 });

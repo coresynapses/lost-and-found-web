@@ -35,7 +35,9 @@ class ItemForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['photo'].required = False  # Make photo optional
+        # The following are optional:
+        self.fields['photo'].required = False
+        self.fields['description'].required = False
 
 #claims creation
 class claimForm(forms.ModelForm):
