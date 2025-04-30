@@ -104,7 +104,7 @@
          data-status="{{ item.status|lower }}"
          data-category="{{ item.category|lower }}"
          data-disposition="{{ item.dateClaimed|yesno:'claimed,unclaimed' }}">
-        <img src="{{ MEDIA_URL }}{{ item.photo }}" alt="{{ item.itemName }}">
+	{% if item.expired %} <img src="{{ MEDIA_URL }}{{ item.photo }}" alt="{{ item.itemName }}"> {% endif %}
         <h3 class="item-name">{{ item.itemName }}</h3>
         <p>Status: {{ item.status }}</p>
         <p>Category: {{ item.category }}</p>

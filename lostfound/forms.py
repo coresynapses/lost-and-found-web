@@ -1,5 +1,9 @@
+from datetime import datetime, timedelta
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.utils import timezone
+
 from . models import CustomUser, Item, claimRequestReport, fraudClaimReport
 
 
@@ -31,15 +35,34 @@ class CustomUserChangeForm(UserChangeForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['itemName', 'description', 'category', 'location', 'photo', 'status', 'contactInfo']
+        fields = [
+            'itemName',
+            'description',
+            'category',
+            'location',
+            'photo',
+            'status',
+            'contactInfo',
+            'sensitiveItem',
+        ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         # The following are optional:
         self.fields['photo'].required = False
         self.fields['description'].required = False
 
-#claims creation
+    def save(self, commit=True):
+        instance = super().save(commit = False)
+        dateToExpire = timezone.now() + timedelta(weeks=1)
+        instance.dateToExpire = dateToExpire
+        if commit:
+            instance.save()
+        return instance
+        
+
+# Claims creation:
 class claimForm(forms.ModelForm):
     class Meta:
         model = claimRequestReport
@@ -48,7 +71,7 @@ class claimForm(forms.ModelForm):
             'proofOfOwnership': forms.Textarea(attrs={'rows':3, 'placeholder': 'Please describe the item in detail.'}),
         }
 
-#fraud creation
+# Fraud creation:
 class fraudForm(forms.ModelForm):
     class Meta:
         model = fraudClaimReport

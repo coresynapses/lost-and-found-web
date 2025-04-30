@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -5,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.core.exceptions import PermissionDenied
 from django.conf import settings
+from django.utils import timezone
 
 # Ensure all models are imported
 from .models import CustomUser, Item, claimRequestReport, fraudClaimReport
@@ -63,6 +66,11 @@ def itemList(request):
         items = Item.objects.filter(itemName__icontains=query) | Item.objects.filter(description__icontains=query)
     else:
         items = Item.objects.all()
+
+    for item in items:
+        item.expired = False
+        if item.dateToExpire:
+            item.expired = timezone.now() > item.dateToExpire
     
     return render(request, 'index.html', {
         'items': items,
@@ -74,14 +82,19 @@ def itemList(request):
 def itemDetail(request, item_id):
     item = get_object_or_404(Item, itemID = item_id)
 
+    hasExpired = False
+    if item.dateToExpire:
+        hasExpired = timezone.now() > item.dateToExpire
+
     return render(request, 'item_detail.html', {
         'item' : item,
+        'hasExpired': hasExpired,
     })
 
 # - Create item, only members can create a report, 
 #   If they are not logged in, it will redirect them to the login
 #   page.
-@login_required(login_url='lostfound:login')
+# @login_required(login_url='lostfound:login')
 def add_item(request):
     if request.method == 'POST':
         form = ItemForm(request.POST, request.FILES)

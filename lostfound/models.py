@@ -84,6 +84,9 @@ class Item(models.Model):
     contactInfo      = models.CharField    ("Contact Information (Email)",max_length=255, default="")
     proofOfOwnership = models.TextField    ("Proof of Ownership",blank=True, null=True)
     claimer          = models.ForeignKey   (CustomUser, null= True, blank = True, on_delete=models.SET_NULL)
+    sensitiveItem    = models.BooleanField ("Sensitive Item", default=False)
+    dateToExpire     = models.DateTimeField(null= True, blank=True)
+    expired          = False
 
     class Meta:
         verbose_name = "Item"
