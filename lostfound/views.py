@@ -74,8 +74,33 @@ def itemList(request):
 def itemDetail(request, item_id):
     item = get_object_or_404(Item, itemID = item_id)
 
+    if request.method == 'POST':
+        form = claimForm(request.POST)
+        if form.is_valid():
+            claim = form.save(commit=False)
+            claim.item= item
+            claim.claimer = request.user
+            claim.save()
+            return redirect('lostfound:itemDetail',item_id = item.itemID)
+    else:
+        form = claimForm()
+
+    if request.method == 'POST':
+        form = fraudForm(request.POST)
+        if form.is_valid():
+            fraud = form.save(commit=False)
+            fraud.item = item
+            fraud.reporter = request.user
+            fraud.save()
+            return redirect('lostfound:itemDetail')
+    else: 
+        form = fraudForm()
+
+    existingClaim = claimRequestReport.objects.filter(item=item, claimer = request.user).first()
     return render(request, 'item_detail.html', {
         'item' : item,
+        'form' : form,
+        'existingClaim' : existingClaim,
     })
 
 # - Create item, only members can create a report, 
@@ -137,11 +162,11 @@ def claimRequest(request, item_id):
             claim.item= item
             claim.claimer = request.user
             claim.save()
-            return redirect('lostfound:itemDetail')
+            return redirect('lostfound:itemDetail',item_id = item.itemID)
     else:
         form = claimForm()
 
-    return render(request,'' ,{'form': form, 'item': item}) #needs HTML
+    return render(request,'item_detail.html' ,{'form': form, 'item': item})
 
 # - Edit claim
 @login_required(login_url='lostfound:login')
@@ -159,7 +184,7 @@ def editClaim(request, claim_id):
     else:
         form = claimForm(instance=claim)
 
-    return render(request, '', {'form': form, 'claim' : claim}) #needs HTML
+    return render(request, 'item_detail.html', {'form': form, 'claim' : claim})
 
 # - Delete claim
 @login_required(login_url='lostfound:login')
@@ -177,7 +202,7 @@ def deleteClaim(request, claim_id):
         else:
             return redirect('lostfound:itemDetail', item_id=claim.item.id)
     
-    return render(request, '', {'claim': claim}) #needs HTML
+    return render(request, 'item_detail.html', {'claim': claim})
 
 
 
@@ -198,7 +223,7 @@ def fraudReport(request, item_id):
     else: 
         form = fraudForm()
     
-    return render(request,'',{'form':form, 'item': item}) #needs HTML
+    return render(request,'item_detail.html',{'form':form, 'item': item})
 
 # - Edit fraud claim
 @login_required(login_url='lostfound:login')
@@ -217,7 +242,7 @@ def editFraud(request, fraud_id):
     else: 
         form = fraudForm(instance=fraud)
 
-    return render(request, '', {'form': form, 'fraud': fraud})
+    return render(request, 'item_detail.html', {'form': form, 'fraud': fraud})
 
 # - Delete fraud claim
 @login_required(login_url='lostfound:login')
@@ -234,5 +259,5 @@ def deleteFraud(request, fraud_id):
         else:
             return redirect('lostfound:itemDetail', item_id=fraud.item.id)
     
-    return render(request, '', {'fraud': fraud})
+    return render(request, 'item_detail.html', {'fraud': fraud})
 

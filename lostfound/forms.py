@@ -43,19 +43,15 @@ class ItemForm(forms.ModelForm):
 class claimForm(forms.ModelForm):
     class Meta:
         model = claimRequestReport
-        fields = ['proofOfOwnership']
-        widgets = {
-            'proofOfOwnership': forms.Textarea(attrs={'rows':3, 'placeholder': 'Please describe the item in detail.'}),
-        }
+        fields = ['proofOfOwnership',]
+
 
 #fraud creation
 class fraudForm(forms.ModelForm):
     class Meta:
         model = fraudClaimReport
-        fields = ['contactInfo','proofOfOwnership',]
-        widgets = {
-            'proofOfOwnership': forms.Textarea(attrs={'rows':3, 'placeholder': 'Please describe the why this item is yours.'}),
-        }
+        fields = ['proofOfOwnership',]
+
 
 
 class searchForm(forms.Form):
