@@ -100,22 +100,7 @@
 <h2 style="text-align: center; font-size: 40px;">Item Details</h2>
 
 <main class="item-detail-container">
-  {% if item.expired %}<img src="{{ item.photo.url }}" alt="{{ item.itemName }}" class="item-image">{% endif %}
-  <div class="content">
-    <div class="card">
-      <h2>{{ item.itemName }}</h2>
-      <p>Description: {{ item.description }}</p>
-      <p>Status: {{ item.status }}</p>
-      <p>Category: {{ item.category.categoryName }}</p>
-      <p>Date Reported: {{ item.dateReported }}</p>
-      <p>Date Claimed: {{ item.dateClaimed|default:"Not claimed yet" }}</p>
-      <p>Contact Information: {{ item.contactInfo }}</p>
-      <button class="claim-btn" id="claim-item-btn">Claim Item</button>
-      {% if existingClaim %} 
-                                <!-- Hidden Report Fraud button -->
-        <button id="report-fraud-btn" style="display: none; background-color: red; color: white; padding: 10px; border: none; border-radius: 5px; margin-top: 10px;">
-          Report Fraud
-        </button>
+
   <!-- Item Detail Section -->
   <main id="item-detail" class="page">
     <div class="container">
@@ -166,7 +151,7 @@
             <button type="submit" name="submit_claim" class="claim-btn">Submit Claim</button>
           </form>
         </div>
-      {% endif %}  
+      
 
     <div class="navigation">
       <button id="prev-btn">← Previous</button>
