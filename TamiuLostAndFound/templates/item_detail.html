@@ -160,11 +160,11 @@
   <!-- Item Detail Section -->
   <main id="item-detail" class="page">
     <div class="container">
-      <img src="{{ item.photo.url }}" alt="{{ item.itemName }}" class="item-image">
+      {% if hasExpired %} <img src="{ item.photo.url }}" alt="{{ item.itemName }}" class="item-image"> {% endif %}
       <div class="content">
         <div class="card">
         <h2>{{item.itemName}}</h2>
-        <p>Description: {{item.description}}</p>
+	{% if hasExpired %} <p>Description: {{item.description}}</p> {% endif %}
         <p>Status:{{item.status}}</p>
         <p>Category: {{ item.category.categoryName }}</p>
         <p>Date Reported: {{ item.dateReported }}</p>
