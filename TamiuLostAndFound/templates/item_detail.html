@@ -100,7 +100,7 @@
 <h2 style="text-align: center; font-size: 40px;">Item Details</h2>
 
 <main class="item-detail-container">
-  <img src="{{ item.photo.url }}" alt="{{ item.itemName }}" class="item-image">
+  {% if item.expired %}<img src="{{ item.photo.url }}" alt="{{ item.itemName }}" class="item-image">{% endif %}
   <div class="content">
     <div class="card">
       <h2>{{ item.itemName }}</h2>
