@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (claimForm && claimButton && reportFraudButton) {
         claimForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+            
     
             console.log('Claim form submitted.');
     
@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
         });
     }
+
 
     if (reportFraudButton && reportFraudForm) {
         reportFraudButton.addEventListener('click', function () {
@@ -186,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     if (fraudFormElement && fraudThankYouMessage && reportFraudFormContainer) {
         fraudFormElement.addEventListener('submit', function(event) {
-            event.preventDefault(); // Stop full page reload
+            
     
             console.log('Fraud form submitted.');
     

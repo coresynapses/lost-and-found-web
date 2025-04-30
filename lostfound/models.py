@@ -110,7 +110,7 @@ class claimRequestReport(models.Model):
     item             = models.OneToOneField(Item, on_delete=models.CASCADE)
     claimer          = models.ForeignKey   (CustomUser, on_delete=models.CASCADE, related_name="claimUser")
     contactInfo      = models.CharField    ("Contact Information",max_length=255, default="")
-    proofOfOwnership = models.TextField    ("Proof of Ownership",default="")
+    proofOfOwnership = models.TextField    (blank=True, null=True, default="")
     status           = models.CharField    (max_length=20, choices=STATUS_CHOICES, default=pending)
     reviewAdmin      = models.ForeignKey   (CustomUser, null= True, blank= True, on_delete=models.SET_NULL, related_name="claimAdminUser")
     dateSubmitted    = models.DateTimeField("Date Submitted",auto_now_add=True)
