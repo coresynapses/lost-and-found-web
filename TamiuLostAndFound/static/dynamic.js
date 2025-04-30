@@ -181,29 +181,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    const fraudFormElement = document.getElementById('fraudForm');
-    const fraudThankYouMessage = document.getElementById('fraud-thank-you');
-    const reportFraudFormContainer = document.getElementById('report-fraud-form');
-    
-    if (fraudFormElement && fraudThankYouMessage && reportFraudFormContainer) {
-        fraudFormElement.addEventListener('submit', function(event) {
-            
-    
-            console.log('Fraud form submitted.');
-    
-            // Hide the Report Fraud form
-            reportFraudFormContainer.style.display = 'none';
-    
-            // Show the Thank You message
-            fraudThankYouMessage.style.display = 'block';
-    
-            // Redirect after 5 seconds (optional)
-            setTimeout(function() {
-                window.location.href = '/'; // or your page
-            }, 5000);
-        });
-    }
-
     // Get the current item ID from the URL
     const currentUrl = window.location.href;
     const itemIdMatch = currentUrl.match(/\/item-list\/(\d+)/);
@@ -217,7 +194,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     const prevItemId = currentItemId - 1;
                     window.location.href = `/item-list/${prevItemId}/`;
 		}
-		// Optional: if at 1, loop to last item? (Advanced)
             });
 	}
 	

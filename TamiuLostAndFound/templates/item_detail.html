@@ -159,7 +159,7 @@
   <!-- Item Detail Section -->
   <main id="item-detail" class="page">
     <div class="container">
-      {% if hasExpired %} <img src="{ item.photo.url }}" alt="{{ item.itemName }}" class="item-image"> {% endif %}
+      {% if hasExpired %} <img src="{{ item.photo.url }}" alt="{{ item.itemName }}" class="item-image"> {% endif %}
       <div class="content">
         <div class="card">
         <h2>{{item.itemName}}</h2>
@@ -169,36 +169,43 @@
         <p>Date Reported: {{ item.dateReported }}</p>
         <p>Date Claimed: {{ item.dateClaimed|default:"Not claimed yet" }}</p>
         <p>Contact Information: {{item.contactInfo}}</p>
+        
+        {% if show_claim_button %}
         <button class="claim-btn" id="claim-item-btn">Claim Item</button>
+      {% endif %}
        
-      {% if existingClaim %} 
-                                <!-- Hidden Report Fraud button -->
-        <button id="report-fraud-btn" style="display: none; background-color: red; color: white; padding: 10px; border: none; border-radius: 5px; margin-top: 10px;">
-          Report Fraud
-        </button>
+                <!-- Hidden Report Fraud button -->
+     {% if show_report_fraud_button %}
+  <button id="report-fraud-btn" style="background-color: red; color: white; padding: 10px; border: none; border-radius: 5px; margin-top: 10px;">
+    Report Fraud
+  </button>
+{% endif %}
         <!-- Hidden Report Fraud Form -->
         <div id="report-fraud-form" class="claim-proof" style="display: none;">
           <form method="post">
             {% csrf_token %}
-            {{ form.as_p}}
-            <button type="submit" class="claim-btn" style="background-color: red;">Submit Report</button>
+            {{ fraud_form.as_p }}
+            <button type="submit" name="submit_fraud" class="claim-btn" style="background-color: red;">Submit Report</button>
           </form>
         </div>
-        <!-- Thank You Message (hidden initially) -->
-        <div id="fraud-thank-you" style="display: none; margin-top: 20px; color: green; font-weight: bold;">
-        Thank you for your fraud report! We will review it shortly.
-        </div>
-      {% else %}
+        <!-- Thank You Message hidden -->
+        {% if show_fraud_thank_you %}
+  <div id="fraud-thank-you" style="margin-top: 20px; color: green; font-weight: bold;">
+    Thank you for your fraud report! We will review it shortly.
+  </div>
+{% endif %}
+{% if fraud_report_under_review %}
+  <div style="margin-top: 20px; color: orange; font-weight: bold;">
+    The report submitted is under review.
+  </div>
+{% endif %}
         <div id="claim-proof-form" class="claim-proof" style="display: none;">
           <form method="post" action="">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="claim-btn">Submit Claim</button>
+            {{ claim_form.as_p }}
+            <button type="submit" name="submit_claim" class="claim-btn">Submit Claim</button>
           </form>
         </div>
-      {% endif %}  
-          
-
         </div>
         <div class="navigation">
             <button id="prev-btn">← Previous</button>

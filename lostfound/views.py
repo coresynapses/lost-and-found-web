@@ -80,42 +80,72 @@ def itemList(request):
 
 # provides details on one item, and can claim or report fraud on item.
 def itemDetail(request, item_id):
-    item = get_object_or_404(Item, itemID = item_id)
+    item = get_object_or_404(Item, itemID=item_id)
 
     hasExpired = False
     if item.dateToExpire:
         hasExpired = timezone.now() > item.dateToExpire
 
+        #for fresh GET request when cycling through items
+    show_fraud_thank_you = False
+    show_claim_thank_you = False
+    show_report_fraud_button = False
+    show_claim_button = True
+
+    claim_form = claimForm()
+    fraud_form = fraudForm()
+
     if request.method == 'POST':
-        form = claimForm(request.POST)
-        if form.is_valid():
-            claim = form.save(commit=False)
-            claim.item= item
-            claim.claimer = request.user
-            claim.save()
-            return redirect('lostfound:itemDetail',item_id = item.itemID)
+        if 'submit_claim' in request.POST:
+            claim_form = claimForm(request.POST)
+            fraud_form = fraudForm()
+            if claim_form.is_valid():
+                claim = claim_form.save(commit=False)
+                claim.item = item
+                claim.claimer = request.user
+                claim.save()
+                show_claim_thank_you = True
+                show_report_fraud_button = True
+                show_claim_button = False
+
+        elif 'submit_fraud' in request.POST:
+            fraud_form = fraudForm(request.POST)
+            claim_form = claimForm()
+            if fraud_form.is_valid():
+                fraud = fraud_form.save(commit=False)
+                fraud.item = item
+                fraud.reporter = request.user
+                fraud.save()
+                show_fraud_thank_you = True
     else:
-        form = claimForm()
+        claim_form = claimForm()
+        fraud_form = fraudForm()
 
-    if request.method == 'POST':
-        form = fraudForm(request.POST)
-        if form.is_valid():
-            fraud = form.save(commit=False)
-            fraud.item = item
-            fraud.reporter = request.user
-            fraud.save()
-            return redirect('lostfound:itemDetail')
-    else: 
-        form = fraudForm()
+    existingClaim = claimRequestReport.objects.filter(item=item, claimer=request.user).first()
+    show_claim_button = existingClaim is None
 
-    existingClaim = claimRequestReport.objects.filter(item=item, claimer = request.user).first()
+    #if prev or next item has been reported message appears
+    existingFraudReport = fraudClaimReport.objects.filter(item=item, reporter=request.user).first()
+
+# under review
+    fraud_report_under_review = (
+    request.method != 'POST' and
+    existingFraudReport is not None and
+    existingFraudReport.status == fraudClaimReport.pending
+)
+
     return render(request, 'item_detail.html', {
-        'item' : item,
-        'form' : form,
-        'existingClaim' : existingClaim,
-        'hasExpired' : hasExpired,
+        'item': item,
+        'hasExpired': hasExpired,
+        'claim_form': claim_form,
+        'fraud_form': fraud_form,
+        'existingClaim': existingClaim,
+        'show_claim_thank_you': show_claim_thank_you,
+        'show_fraud_thank_you': show_fraud_thank_you,
+         'show_report_fraud_button': show_report_fraud_button,
+         'show_claim_button': show_claim_button,
+         'fraud_report_under_review': fraud_report_under_review,
     })
-
 # - Create item, only members can create a report, 
 #   If they are not logged in, it will redirect them to the login
 #   page.
