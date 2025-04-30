@@ -113,6 +113,7 @@ def itemDetail(request, item_id):
         'item' : item,
         'form' : form,
         'existingClaim' : existingClaim,
+        'hasExpired' : hasExpired,
     })
 
 # - Create item, only members can create a report, 
