@@ -18,30 +18,26 @@
     <button type="submit">Search</button>
 </form>
 
-<!-- Filters -->
-<div class="filters">
-    <select id="status-filter" class="filter-dropdown">
-        <option value="all">All Statuses</option>
-        <option value="lost">Lost</option>
-        <option value="found">Found</option>
+
+<!-- Filters-->
+<form method="get" id="filters-form">
+    <div class="filters">
+      <select name="status" class="filter-dropdown" onchange="document.getElementById('filters-form').submit();">
+          <option value="">All Statuses</option>
+          <option value="Lost" {% if request.GET.status == "Lost" %}selected{% endif %}>Lost</option>
+          <option value="Found" {% if request.GET.status == "Found" %}selected{% endif %}>Found</option>
+      </select>
+      
+      <select name="category" class="filter-dropdown" onchange="document.getElementById('filters-form').submit();">
+        <option value="">All Categories</option>
+        {% for cat in categories %}
+            <option value="{{ cat.categoryID }}" {% if request.GET.category == cat.categoryID|stringformat:"s" %}selected{% endif %}>
+                {{ cat.categoryName }}
+            </option>
+        {% endfor %}
     </select>
-    <select id="category-filter" class="filter-dropdown">
-        <option value="all">All Categories</option>
-        <option value="electronics">Electronics</option>
-        <option value="jewelry">Jewelry</option>
-        <option value="clothing">Clothing</option>
-        <option value="technology">Technology</option>
-        <option value="apparel">Apparel</option>
-        <option value="accessory">Accessory</option>
-        <option value="finance">Finance</option>
-        <option value="other">Other</option>
-    </select>
-    <select id="disposition-filter" class="filter-dropdown">
-        <option value="all">All Dispositions</option>
-        <option value="claimed">Claimed</option>
-        <option value="unclaimed">Unclaimed</option>
-    </select>
-</div>
+    </div>  
+</form>  
 
 <!-- Upload & Toggle -->
 <div class="upload-container">

@@ -10,7 +10,7 @@ from django.conf import settings
 from django.utils import timezone
 
 # Ensure all models are imported
-from .models import CustomUser, Item, claimRequestReport, fraudClaimReport
+from .models import CustomUser, Item, claimRequestReport, fraudClaimReport, Category
 from .forms import CustomUserCreationForm, ItemForm, claimForm, fraudForm
 
 #authentication & homepage
@@ -62,10 +62,17 @@ def logout_user(request):
 # - Lists all items and filters through item name, or description
 def itemList(request):
     query = request.GET.get('query')
+    items = Item.objects.all()
     if query:
         items = Item.objects.filter(itemName__icontains=query) | Item.objects.filter(description__icontains=query)
-    else:
-        items = Item.objects.all()
+
+    status = request.GET.get('status')
+    category = request.GET.get('category')
+
+    if status:
+        items = items.filter(status=status)
+    if category:
+        items = items.filter(category__categoryID=category)
 
     for item in items:
         item.expired = False
@@ -74,6 +81,7 @@ def itemList(request):
     
     return render(request, 'index.html', {
         'items': items,
+        'categories': Category.objects.all(),
         'MEDIA_URL': settings.MEDIA_URL,
         'query': query,
     })

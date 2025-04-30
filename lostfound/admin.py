@@ -52,6 +52,7 @@ class itemAdmin(admin.ModelAdmin):
         "status",
         "contactInfo",  # Andres's updates
         "photo",  # Andrew's Updates
+        'dateToExpire',
     ]
     list_per_page = 20
 
