@@ -1,27 +1,37 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>  
+<head>
     <title>{% block title %}TAMIU Lost & Found{% endblock %}</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'dynamic.js' %}" defer></script>
     <style>
-        .maroon-header{
-            background-color: #61162d;
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
         }
-        form p label{
-            display:block;
-            margin-bottom: 0.25rem;
-            font-weight: 500;
-            
-        }   
+        body.dark-mode .theme-toggle {
+            color: white;
+        }
     </style>
 </head>
 <body>
     <header class="maroon-header text-white py-3">
         <div class="container text-center">
+            <h1>TAMIU Lost & Found</h1>
         </div>
     </header>
 
-    <div class = "container mt-4">
+    <!-- Global toggle button -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">🌙</button>
+
+    <div class="container mt-4">
         {% block content %}{% endblock %}
     </div>
 </body>

@@ -1,7 +1,7 @@
-console.log("TAMIU Lost and Found"); //test commit 2
+
+console.log("TAMIU Lost and Found"); // test commit 2
 console.log('dynamic.js loaded');
 
-// All logic INSIDE DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM fully loaded and parsed');
 
@@ -26,9 +26,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const reportFraudForm = document.getElementById('report-fraud-form');
     const prevButton = document.getElementById('prev-btn');
     const nextButton = document.getElementById('next-btn');
+    const fraudFormElement = document.getElementById('fraudForm');
+    const fraudThankYouMessage = document.getElementById('fraud-thank-you');
+    const reportFraudFormContainer = document.getElementById('report-fraud-form');
+    const themeButton = document.getElementById('themeToggle');
 
-
-    // Login Button
+    // Login toggle
     if (loginButton && loginSection) {
         loginButton.addEventListener("click", function () {
             loginSection.style.display = loginSection.style.display === "block" ? "none" : "block";
@@ -37,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Registration Button
+    // Registration toggle
     if (registrationButton && registrationSection) {
         registrationButton.addEventListener("click", function () {
             registrationSection.style.display = registrationSection.style.display === "block" ? "none" : "block";
@@ -46,14 +49,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Return to Main Button
+    // Return button
     if (returnToMainButton && loginSection) {
         returnToMainButton.addEventListener("click", function () {
             loginSection.style.display = "none";
         });
     }
 
-    // Search Bar
+    // Search bar
     if (searchBar) {
         searchBar.addEventListener('input', function (e) {
             const query = e.target.value.toLowerCase();
@@ -65,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Report Button
+    // Show report form
     if (showReportButton && reportForm) {
         showReportButton.addEventListener("click", function () {
             reportForm.style.display = "block";
@@ -78,15 +81,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Upload Image Preview
+    // Upload image preview
     if (uploadImageInput) {
         uploadImageInput.addEventListener('change', function (event) {
             const file = event.target.files[0];
-            if (file) {
-                if (!file.type.startsWith('image/')) {
-                    alert('Please upload a valid image file.');
-                    return;
-                }
+            if (file && file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     const previewContainer = document.getElementById('preview-container');
@@ -95,11 +94,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 };
                 reader.readAsDataURL(file);
+            } else {
+                alert('Please upload a valid image file.');
             }
         });
     }
 
-    // Upload Button
     if (uploadButton && uploadImageInput) {
         uploadButton.addEventListener('click', function () {
             const file = uploadImageInput.files[0];
@@ -133,99 +133,79 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // CLAIM ITEM BUTTON 
+    // Claim logic
     if (claimButton && claimForm) {
-        console.log('Claim button and form found!');
-	
         claimButton.addEventListener('click', function () {
-            console.log('Claim button clicked!');
-            if (claimForm.style.display === 'none' || claimForm.style.display === '') {
-                claimForm.style.display = 'flex';
-            } else {
-                claimForm.style.display = 'none';
-            }
+            claimForm.style.display = claimForm.style.display === 'none' ? 'flex' : 'none';
         });
-
-    } else {
-        console.log('Claim button or claim form not found!');
     }
 
     if (claimForm && claimButton && reportFraudButton) {
-        claimForm.addEventListener('submit', function(event) {
-            
-    
-            console.log('Claim form submitted.');
-    
-            // Hide 
+        claimForm.addEventListener('submit', function (event) {
+            event.preventDefault();
             claimButton.style.display = 'none';
-
-             // Hide 
             claimForm.style.display = 'none';
-    
-            // Show Report Fraud button
             reportFraudButton.style.display = 'inline-block';
-    
-        
         });
     }
-
 
     if (reportFraudButton && reportFraudForm) {
         reportFraudButton.addEventListener('click', function () {
-            console.log('Report Fraud button clicked!');
-            if (reportFraudForm.style.display === 'none' || reportFraudForm.style.display === '') {
-                reportFraudForm.style.display = 'flex'; // Open the form
-            } else {
-                reportFraudForm.style.display = 'none'; // (Optional: clicking again hides it)
-            }
+            reportFraudForm.style.display = reportFraudForm.style.display === 'none' ? 'flex' : 'none';
         });
     }
 
-    const fraudFormElement = document.getElementById('fraudForm');
-    const fraudThankYouMessage = document.getElementById('fraud-thank-you');
-    const reportFraudFormContainer = document.getElementById('report-fraud-form');
-    
     if (fraudFormElement && fraudThankYouMessage && reportFraudFormContainer) {
-        fraudFormElement.addEventListener('submit', function(event) {
-            
-    
-            console.log('Fraud form submitted.');
-    
-            // Hide the Report Fraud form
+        fraudFormElement.addEventListener('submit', function (event) {
+            event.preventDefault();
             reportFraudFormContainer.style.display = 'none';
-    
-            // Show the Thank You message
             fraudThankYouMessage.style.display = 'block';
-    
-            // Redirect after 5 seconds (optional)
-            setTimeout(function() {
-                window.location.href = '/'; // or your page
+            setTimeout(function () {
+                window.location.href = '/';
             }, 5000);
         });
     }
 
-    // Get the current item ID from the URL
+    // Navigation buttons
     const currentUrl = window.location.href;
     const itemIdMatch = currentUrl.match(/\/item-list\/(\d+)/);
-    
     if (itemIdMatch) {
-	let currentItemId = parseInt(itemIdMatch[1]); // Extract current item ID as number
-	
-	if (prevButton) {
-            prevButton.addEventListener('click', function() {
-		if (currentItemId > 1) { // Optional: Only go back if > 1
+        let currentItemId = parseInt(itemIdMatch[1]);
+        if (prevButton) {
+            prevButton.addEventListener('click', function () {
+                if (currentItemId > 1) {
                     const prevItemId = currentItemId - 1;
                     window.location.href = `/item-list/${prevItemId}/`;
-		}
-		// Optional: if at 1, loop to last item? (Advanced)
+                }
             });
-	}
-	
-	if (nextButton) {
-            nextButton.addEventListener('click', function() {
-		const nextItemId = currentItemId + 1;
-		window.location.href = `/item-list/${nextItemId}/`;
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', function () {
+                const nextItemId = currentItemId + 1;
+                window.location.href = `/item-list/${nextItemId}/`;
             });
-	}
+        }
+    }
+
+    // THEME TOGGLE
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeButton.textContent = '☀️';
+        } else {
+            document.body.classList.remove('dark-mode');
+            themeButton.textContent = '🌙';
+        }
+        localStorage.setItem('theme', theme);
+    }
+
+    applyTheme(savedTheme);
+
+    if (themeButton) {
+        themeButton.addEventListener('click', () => {
+            const isDark = document.body.classList.contains('dark-mode');
+            applyTheme(isDark ? 'light' : 'dark');
+        });
     }
 });

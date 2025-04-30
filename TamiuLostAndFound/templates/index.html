@@ -1,74 +1,24 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lost and Found</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    
-</head>
-<body>
 
-<header>
-    <h1>Lost and Found</h1> 
+{% block content %}
 
-</header>
-
-    <nav class="nav-buttons">
+<nav class="nav-buttons">
     {% if user.is_authenticated %}
         <a href="{% url 'lostfound:logout' %}" class="btn btn-secondary">Logout</a>
     {% else %}
         <a href="/login/" id="loginButton" class="btn btn-primary">Login</a>
         <a href="/register/" id="registrationButton" class="btn btn-success">Register</a>
     {% endif %}
+</nav>
 
-    </nav>
+<!-- Search Bar -->
+<form method="get" class="search-container">
+    <input type="text" name="query" id="search-bar" placeholder="Search item here...">
+    <button type="submit">Search</button>
+</form>
 
-    <!-- Search Bar -->        
-        <form method="get" class="search-container">
-            <input type="text" name="query" id="search-bar" placeholder="Search item here...">
-            <button type="submit">Search</button>
-        </form>
-
-
-<!--Login Form
-<div class="login-section" id="loginSection">
-    <form method="post">
-        {% csrf_token %}
-        <label for="id_username">Username:</label>
-        <input type="text" id="id_username" name="username" required>
-
-        <label for="id_password">Password:</label>
-        <input type="password" id="id_password" name="password" required>
-
-        <button type="submit" class="btn-primary">Login</button>
-    </form>
-
-    Return to Main menu Button
-    <button id="returnToMain" class="btn-secondary">Return to Main Page</button>
-</div>
--->
-
-
-<!-- Registration Form Section
-<div class="registration-section full-page" id="registrationSection" style="display: none;">
-    <form method="post">
-        {% csrf_token %}
-        <label for="id_username">Username:</label>
-        {{ form.username }}
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="id_password1">Password:</label>
-        {{ form.password1 }}
-        <label for="id_password2">Confirm Password:</label>
-        {{ form.password2 }}
-        <button type="submit" class="btn btn-primary">Register</button>
-    </form>
-</div>
--->
-
-<!-- Filters-->
+<!-- Filters -->
 <div class="filters">
     <select id="status-filter" class="filter-dropdown">
         <option value="all">All Statuses</option>
@@ -93,15 +43,12 @@
     </select>
 </div>
 
-<!-- Image upload -->
+<!-- Upload & Toggle -->
 <div class="upload-container">
-    <!-- Item Upload Button -->
     <a href="{% url 'lostfound:add_item' %}" class="details-btn">Report Item</a>
-
-    <div id="preview-container"></div>
 </div>
 
-<!-- Grid-based Item Display -->
+<!-- Item Grid -->
 <div class="item-container" style="height: 400px;">
     {% for item in items %}
     <div class="item-card"
@@ -119,6 +66,4 @@
     {% endfor %}
 </div>
 
-<script src="{% static 'dynamic.js' %}"></script>
-</body>
-</html>
+{% endblock %}

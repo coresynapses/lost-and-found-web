@@ -2,7 +2,33 @@
 
 {% block content %}
 <h2 class = "text-center mb-4">Lost and Found Submission Page</h2>
+<style>
+    form {
+        text-align: left !important;
+        max-width: 600px;
+        margin: 0 auto; /* center the form box itself */
+    }
 
+    form label {
+        display: block;
+        font-weight: bold;
+        margin-top: 15px;
+        text-align: left;
+    }
+
+    form input, form select, form textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .btn {
+        margin-top: 20px;
+    }
+</style>
 <form method="post" enctype="multipart/form-data" class="border p-4 rounded shadow-sm bg-light">
     {% csrf_token %}
     {{ form.as_p }}
