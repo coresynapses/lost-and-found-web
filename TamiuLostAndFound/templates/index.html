@@ -1,70 +1,50 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lost and Found</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    
-</head>
-<body>
 
-<header>
-    <h1>Lost and Found</h1> 
+{% block content %}
 
-</header>
-
-    <nav class="nav-buttons">
+<nav class="nav-buttons">
     {% if user.is_authenticated %}
         <a href="{% url 'lostfound:logout' %}" class="btn btn-secondary">Logout</a>
     {% else %}
         <a href="/login/" id="loginButton" class="btn btn-primary">Login</a>
         <a href="/register/" id="registrationButton" class="btn btn-success">Register</a>
     {% endif %}
+</nav>
 
-    </nav>
+<!-- Search Bar -->
+<form method="get" class="search-container">
+    <input type="text" name="query" id="search-bar" placeholder="Search item here...">
+    <button type="submit">Search</button>
+</form>
 
-    <!-- Search Bar -->        
-        <form method="get" class="search-container">
-            <input type="text" name="query" id="search-bar" placeholder="Search item here...">
-            <button type="submit">Search</button>
-        </form>
 
 <!-- Filters-->
-<div class="filters">
-    <select id="status-filter" class="filter-dropdown">
-        <option value="all">All Statuses</option>
-        <option value="lost">Lost</option>
-        <option value="found">Found</option>
+<form method="get" id="filters-form">
+    <div class="filters">
+      <select name="status" class="filter-dropdown" onchange="document.getElementById('filters-form').submit();">
+          <option value="">All Statuses</option>
+          <option value="Lost" {% if request.GET.status == "Lost" %}selected{% endif %}>Lost</option>
+          <option value="Found" {% if request.GET.status == "Found" %}selected{% endif %}>Found</option>
+      </select>
+      
+      <select name="category" class="filter-dropdown" onchange="document.getElementById('filters-form').submit();">
+        <option value="">All Categories</option>
+        {% for cat in categories %}
+            <option value="{{ cat.categoryID }}" {% if request.GET.category == cat.categoryID|stringformat:"s" %}selected{% endif %}>
+                {{ cat.categoryName }}
+            </option>
+        {% endfor %}
     </select>
-    <select id="category-filter" class="filter-dropdown">
-        <option value="all">All Categories</option>
-        <option value="electronics">Electronics</option>
-        <option value="jewelry">Jewelry</option>
-        <option value="clothing">Clothing</option>
-        <option value="technology">Technology</option>
-        <option value="apparel">Apparel</option>
-        <option value="accessory">Accessory</option>
-        <option value="finance">Finance</option>
-        <option value="other">Other</option>
-    </select>
-    <select id="disposition-filter" class="filter-dropdown">
-        <option value="all">All Dispositions</option>
-        <option value="claimed">Claimed</option>
-        <option value="unclaimed">Unclaimed</option>
-    </select>
-</div>
+    </div>  
+</form>  
 
-<!-- Image upload -->
+<!-- Upload & Toggle -->
 <div class="upload-container">
-    <!-- Item Upload Button -->
     <a href="{% url 'lostfound:add_item' %}" class="details-btn">Report Item</a>
-
-    <div id="preview-container"></div>
 </div>
 
-<!-- Grid-based Item Display -->
+<!-- Item Grid -->
 <div class="item-container" style="height: 400px;">
     {% for item in items %}
     <div class="item-card"
@@ -82,6 +62,4 @@
     {% endfor %}
 </div>
 
-<script src="{% static 'dynamic.js' %}"></script>
-</body>
-</html>
+{% endblock %}
