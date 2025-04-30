@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 
 class CustomUser(AbstractUser):
+    phoneNumber = models.CharField(max_length=15,blank=True,null=True)
+
     def searchItem(self,query):
         return Item.objects.filter(itemName__icontains=query) | Item.objects.filter(description__icontains=query)
     
