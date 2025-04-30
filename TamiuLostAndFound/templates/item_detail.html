@@ -111,31 +111,32 @@
       <p>Date Claimed: {{ item.dateClaimed|default:"Not claimed yet" }}</p>
       <p>Contact Information: {{ item.contactInfo }}</p>
       <button class="claim-btn" id="claim-item-btn">Claim Item</button>
-
-      <div id="claim-proof-form" class="claim-proof" style="display: none;">
-        <form method="POST">
-          {% csrf_token %}
-          <label for="proof">Explanation/proof of ownership:</label>
-          <textarea id="proof" name="proof" required></textarea>
-          <button type="submit" class="claim-btn">Submit Claim</button>
-        </form>
-      </div>
-
-      <button id="report-fraud-btn" class="fraud-btn" style="display: none;">Report Fraud</button>
-
-      <div id="report-fraud-form" class="claim-proof" style="display: none;">
-        <form id="fraudForm" method="POST">
-          {% csrf_token %}
-          <label for="fraud-report">Explain suspected fraud/Proof of ownership:</label>
-          <textarea id="fraud-report" name="fraud-report" required></textarea>
-          <button type="submit" class="claim-btn fraud-btn">Submit Report</button>
-        </form>
-      </div>
-
-      <div id="fraud-thank-you" class="thank-you">
+      {% if existingClaim %} 
+                                <!-- Hidden Report Fraud button -->
+        <button id="report-fraud-btn" style="display: none; background-color: red; color: white; padding: 10px; border: none; border-radius: 5px; margin-top: 10px;">
+          Report Fraud
+        </button>
+        <!-- Hidden Report Fraud Form -->
+        <div id="report-fraud-form" class="claim-proof" style="display: none;">
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button type="submit" class="claim-btn" style="background-color: red;">Submit Report</button>
+          </form>
+        </div>
+        <!-- Thank You Message (hidden initially) -->
+        <div id="fraud-thank-you" style="display: none; margin-top: 20px; color: green; font-weight: bold;">
         Thank you for your fraud report! We will review it shortly.
-      </div>
-    </div>
+        </div>
+      {% else %}
+        <div id="claim-proof-form" class="claim-proof" style="display: none;">
+          <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="claim-btn">Submit Claim</button>
+          </form>
+        </div>
+      {% endif %}  
 
     <div class="navigation">
       <button id="prev-btn">← Previous</button>
