@@ -82,15 +82,10 @@ def itemList(request):
 def itemDetail(request, item_id):
     item = get_object_or_404(Item, itemID = item_id)
 
-<<<<<<< HEAD
     hasExpired = False
     if item.dateToExpire:
         hasExpired = timezone.now() > item.dateToExpire
 
-    return render(request, 'item_detail.html', {
-        'item' : item,
-        'hasExpired': hasExpired,
-=======
     if request.method == 'POST':
         form = claimForm(request.POST)
         if form.is_valid():
@@ -118,7 +113,6 @@ def itemDetail(request, item_id):
         'item' : item,
         'form' : form,
         'existingClaim' : existingClaim,
->>>>>>> 622e422281f782bd5aec20338cb3f5c28e9f4801
     })
 
 # - Create item, only members can create a report, 
